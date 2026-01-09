@@ -70,7 +70,7 @@
           </td>
           <td>
             <?
-              if(unitData["Reviewed"] === 0 !hasAccessRoleInDocuments)
+              if(unitData["Reviewed"] === 0 || !hasAccessRoleInDocuments)
               {
             ?>
                <span><?=unitData["Reviewed"]?></span>
@@ -90,7 +90,7 @@
           </td>
           <td>
             <?
-              if(unitData["Total"] === 0 !hasAccessRoleInDocuments)
+              if(unitData["Total"] === 0 || !hasAccessRoleInDocuments)
               {
             ?>
                <span><?=unitData["Total"]?></span>
