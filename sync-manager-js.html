@@ -1,100 +1,117 @@
 <script>
-
-  $("#btnSyncCyber2025").click(function() {
+  $("#btnSyncCyber2025").click(function () {
     $("#lblSyncCyber2025").html("synching...");
     $("#lblSyncCyber2025").removeClass();
 
     google.script.run
-    .withSuccessHandler(function(data) {
-      // 'data' is the JSON object returned by updateCyberSecurity2025()
-      if (data && data === "Success") {
-        $("#lblSyncCyber2025").html("synced");
-        $("#lblSyncCyber2025").addClass("text-success");
-      }
-      else {
+      .withSuccessHandler(function (data) {
+        // 'data' is the JSON object returned by updateCyberSecurity2025()
+        if (data && data === "Success") {
+          $("#lblSyncCyber2025").html("synced");
+          $("#lblSyncCyber2025").addClass("text-success");
+        } else {
+          $("#lblSyncCyber2025").html("error");
+          $("#lblSyncCyber2025").addClass("text-danger");
+        }
+      })
+      .withFailureHandler(function (error) {
         $("#lblSyncCyber2025").html("error");
         $("#lblSyncCyber2025").addClass("text-danger");
-      }
-    })
-    .withFailureHandler(function(error) {
-      $("#lblSyncCyber2025").html("error");
-      $("#lblSyncCyber2025").addClass("text-danger");
-    })
-    .updateCyberSecurity2025(); // The function name in code.gs
-    
+      })
+      .updateCyberSecurity2025(); // The function name in code.gs
   });
 
-  $("#btnSyncCyber2024").click(function() {
-
+  $("#btnSyncCyber2024").click(function () {
     $("#lblSyncCyber2024").html("synching...");
     $("#lblSyncCyber2024").removeClass();
 
     google.script.run
-    .withSuccessHandler(function(data) {
-      // 'data' is the JSON object returned by updateCyberSecurity2024()
-      if (data && data === "Success") {
-        $("#lblSyncCyber2024").html("synced");
-        $("#lblSyncCyber2024").addClass("text-success");
-      }
-      else {
+      .withSuccessHandler(function (data) {
+        // 'data' is the JSON object returned by updateCyberSecurity2024()
+        if (data && data === "Success") {
+          $("#lblSyncCyber2024").html("synced");
+          $("#lblSyncCyber2024").addClass("text-success");
+        } else {
+          $("#lblSyncCyber2024").html("error");
+          $("#lblSyncCyber2024").addClass("text-danger");
+        }
+      })
+      .withFailureHandler(function (error) {
         $("#lblSyncCyber2024").html("error");
         $("#lblSyncCyber2024").addClass("text-danger");
-      }
-    })
-    .withFailureHandler(function(error) {
-      $("#lblSyncCyber2024").html("error");
-      $("#lblSyncCyber2024").addClass("text-danger");
-    })
-    .updateCyberSecurity2024(); // The function name in code.gs
-    
-  }); 
+      })
+      .updateCyberSecurity2024(); // The function name in code.gs
+  });
+
+  $("#btnDataPrivacy").click(function () {
+    $("#lblSyncDataPrivacy").html("synching...");
+    $("#lblSyncDataPrivacy").removeClass();
+
+    google.script.run
+      .withSuccessHandler(function (data) {
+        // 'data' is the JSON object returned by updateDataPrivacyTrainingData()
+        if (data && data === "Success") {
+          $("#lblSyncDataPrivacy").html("synced");
+          $("#lblSyncDataPrivacy").addClass("text-success");
+        } else {
+          $("#lblSyncDataPrivacy").html("error");
+          $("#lblSyncDataPrivacy").addClass("text-danger");
+        }
+      })
+      .withFailureHandler(function (error) {
+        $("#lblSyncDataPrivacy").html("error");
+        $("#lblSyncDataPrivacy").addClass("text-danger");
+      })
+      .updateDataPrivacyTrainingData(); // The function name in code.gs
+  });
 
   function upload() {
-    $('#upload-error').hide();
-    $('#upload-name-error').hide();
+    $("#upload-error").hide();
+    $("#upload-name-error").hide();
 
-    const file = $('#fileInputVASummary')[0].files[0];
-    const fileName = $('#fileNameVASummary').val();
-    
+    const file = $("#fileInputVASummary")[0].files[0];
+    const fileName = $("#fileNameVASummary").val();
+
     if (!file || !fileName) {
-      if (!file) $('#upload-error').show();
-      if (!fileName) $('#upload-name-error').show();
+      if (!file) $("#upload-error").show();
+      if (!fileName) $("#upload-name-error").show();
       return;
     }
 
     const reader = new FileReader();
-    console.log('fileName: ', fileName);
-    
-    reader.onload = e => {
-      const base64Data = e.target.result.split(',')[1];
+    console.log("fileName: ", fileName);
 
-      $('#upload-btn').prop('disabled', true);
-      $('#upload-status').html('⏳ Uploading...');
+    reader.onload = (e) => {
+      const base64Data = e.target.result.split(",")[1];
+
+      $("#upload-btn").prop("disabled", true);
+      $("#upload-status").html("⏳ Uploading...");
 
       google.script.run
         .withSuccessHandler(showResult)
         .withFailureHandler(showError)
-        .uploadAndSummarize(base64Data, fileName, "1tcM-9MsOuIm1bRXdDXCv3Av54a5Lmbh8");
+        .uploadAndSummarize(
+          base64Data,
+          fileName,
+          "1tcM-9MsOuIm1bRXdDXCv3Av54a5Lmbh8"
+        );
     };
 
     reader.readAsDataURL(file);
   }
 
   function showResult(response) {
-    console.log('success response: ', response);
-    $('#upload-status').html(
+    console.log("success response: ", response);
+    $("#upload-status").html(
       `✅ Uploaded: <a href="${response.fileUrl}" target="_blank">${response.name}</a>`
     );
-    $('#fileInputVASummary').val('');
-    $('#fileNameVASummary').val('');
-    $('#upload-btn').prop('disabled', false);
+    $("#fileInputVASummary").val("");
+    $("#fileNameVASummary").val("");
+    $("#upload-btn").prop("disabled", false);
   }
 
   function showError(err) {
-    $('#upload-status').html(
-      `❌ Upload failed: ${err.message}`
-    );
-    $('#upload-btn').prop('disabled', false);
+    $("#upload-status").html(`❌ Upload failed: ${err.message}`);
+    $("#upload-btn").prop("disabled", false);
   }
-
 </script>
