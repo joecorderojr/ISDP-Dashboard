@@ -1,0 +1,434 @@
+<script>
+
+Chart.register(ChartDataLabels);
+
+/* DONUT CHARTS */
+const customTooltipDonut = {
+  callbacks: {
+    label: function (context) {
+      const label = context.label || "";
+      const value = context.raw;
+      const total = context.dataset.data.reduce((a, b) => a + b, 0);
+      const percent = ((value / total) * 100).toFixed(1) + "%";
+
+      const color = context.dataset.backgroundColor[context.dataIndex];
+
+      return [` Value: ${value}`, ` Percentage: ${percent}`];
+    },
+  },
+  bodyFont: {
+    size: 16, // You can change this value
+  },
+  displayColors: true,
+};
+
+const customTooltipDonutMain = {
+  callbacks: {
+    label: function (context) {
+      const label = context.label || "";
+      const value = context.raw;
+      const total = context.dataset.data.reduce((a, b) => a + b, 0);
+      const percent = ((value / total) * 100).toFixed(1) + "%";
+
+      const color = context.dataset.backgroundColor[context.dataIndex];
+
+      return [` Value: ${value}`, ` ${percent}`];
+    },
+  },
+  bodyFont: {
+    size: 12, // You can change this value
+  },
+  displayColors: true,
+};
+
+const DS = document.getElementById("DS").getContext("2d");
+
+const DSdata = {
+  labels: ["Overdue", "Reviewed", "For Review"],
+  datasets: [
+    {
+      data: <?!=JSON.stringify(data_doc_total)?>,
+      backgroundColor: ["#6236a1", "#42256c", "#916f93"],
+      hoverOffset: 4,
+      borderColor: [
+            'rgba(89, 51, 146, 1)',
+            'rgba(133, 77, 220, 1)'
+      ],
+      borderWidth: 1
+    },
+    
+  ],
+};
+
+const DSconfig = {
+  type: "pie",
+  data: DSdata,
+  options: {
+    responsive: true,
+    plugins: {
+      datalabels: {
+        color: "white",
+        font: {
+          weight: "bold",
+          size: 16,
+        },
+        formatter: (value, context) => {
+          const total = context.chart.data.datasets[0].data.reduce(
+            (a, b) => a + b,
+            0
+          );
+          const percentage = (value / total) * 100;
+          // Don't show labels for slices smaller than 5%
+          //return percentage < 3 ? "" : percentage.toFixed(0) + "%";
+          //return percentage < 3 ? "" : value;
+          return value;
+        },
+      },
+      legend: {
+        display: true, // Show legend
+        position: "top", // Legend position
+        labels: {
+          color: "white",
+        },
+      },
+      title: {
+        display: true,
+        text: "Total Documents",
+        color: "white",
+        font: {
+          size: 20
+        }
+      },
+      tooltip: customTooltipDonut,
+    },
+  },
+};
+
+const DSchart = new Chart(DS, DSconfig);
+
+
+const DSMain = document.getElementById("DSMain").getContext("2d");
+const DSMainData = {
+  labels: <?!= JSON.stringify(npc_checklist_data.labels) ?>,
+  datasets: [
+    {
+      data: <?!= JSON.stringify(npc_checklist_data.values) ?>,
+      backgroundColor: ["#6236a1", "#42256c", "#916f93"],
+      hoverOffset: 4,
+      borderColor: [
+            'rgba(89, 51, 146, 1)',
+            'rgba(133, 77, 220, 1)'
+      ],
+      borderWidth: 1
+    },
+    
+  ],
+};
+const DSMainconfig = {
+    type: 'pie', // Specify the chart type
+    data: DSMainData,
+    options: {
+        responsive: true,
+        plugins: {
+            datalabels: { display: false },
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'Data Privacy Act (DPA) of 2012',
+                color: 'white'
+            },
+            tooltip: {
+                enabled: true
+            }
+        }
+    },
+};
+ 
+const DSchartMain = new Chart(DSMain, DSMainconfig);
+
+const TDU = document.getElementById("TDU").getContext("2d");
+const TDUdata = <?!=JSON.stringify(getChartJsTopDocumentUsageMetrics());?>;
+
+
+const TDUconfig = {
+  type: "doughnut",
+  data: TDUdata,
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      datalabels: {
+        color: "white",
+        font: {
+          weight: "bold",
+          size: 16,
+        },
+        formatter: (value, context) => {
+          const total = context.chart.data.datasets[0].data.reduce(
+            (a, b) => a + b,
+            0
+          );
+          const percentage = (value / total) * 100;
+          // Don't show labels for slices smaller than 5%
+          //return percentage < 3 ? "" : percentage.toFixed(0) + "%";
+          //return percentage < 3 ? "" : value;
+          return value;
+        },
+      },
+      legend: {
+        display: true, // Show legend
+        position: "top", // Legend position
+        labels: {
+          color: "white",
+        },
+      },
+      title: {
+        display: true,
+        text: "Total Documents per Unit",
+        color: "white",
+        font: {
+          size: 20
+        }
+      },
+      tooltip: customTooltipDonut,
+    },
+  },
+};
+
+const TDUchart = new Chart(TDU, TDUconfig);
+
+
+/* BAR GRAPHS */
+
+ 
+  const DocMain = document.getElementById("DocMain").getContext("2d");
+  const DocMaindata =  <?!=JSON.stringify(pivotCountsToChartDocStatusDataPercentage(null,null));?>;
+
+  const DocMainconfig = {
+    type: "bar",
+    data: DocMaindata,
+    options: {
+      responsive: true,
+      plugins: {
+        datalabels: {
+          anchor: "middle",
+          color: function (context) {
+            return "white";
+          },
+          font: { size: 11 },
+          formatter: (value) => {
+            if (value === 0) {
+              return null; // or return "";
+            }
+            return value + "%";
+          },
+          offset: 2,
+          padding: 0,
+        },
+        legend: { display: false },
+        title: {
+          display: true,
+          text: "Documents Review per Unit",
+          color: "white"
+        },
+        tooltip: customTooltipSingleBar,
+      },
+      scales: {
+        x: { 
+          stacked: true,
+          ticks: {
+                    color: 'white', // Set Y-axis tick label color to white
+                    display: true
+                },
+          },
+        y: {
+          stacked: true,
+          max: 100,
+          ticks: {
+            callback: (value) => value + "%",
+            color: 'white'
+          }
+        }
+      },
+    },
+  };
+
+  
+const DocMainbar = new Chart(DocMain, DocMainconfig);
+
+
+const RC = document.getElementById("RC").getContext("2d");
+const RCData = <?!=JSON.stringify(pivotCountsToChartDocStatusDataPercentage("Reviewed","#50297d"));?>;
+
+const RCconfig = {
+    type: "bar",
+    data: RCData,
+    options: {
+      responsive: true,
+      plugins: {
+        datalabels: {
+          anchor: "middle",
+          color: function (context) {
+            return "white";
+          },
+          font: { size: 11 },
+          formatter: (value) => {
+            if (value === 0) {
+              return null; // or return "";
+            }
+            return value + "%";
+          },
+          offset: 2,
+          padding: 0,
+        },
+        legend: { display: false },
+        title: {
+          display: true,
+          text: "Reviewed",
+          color: "white",
+          font: {
+              size: 20
+          }
+        },
+        tooltip: customTooltipBar,
+      },
+      scales: {
+        x: { 
+          stacked: true,
+          ticks: {
+                    color: 'white', // Set Y-axis tick label color to white
+                    display: true
+                },
+          },
+        y: {
+          stacked: true,
+          max: 100,
+          ticks: {
+            callback: (value) => value + "%",
+            color: 'white'
+          },
+          grid: { color: "#666" }
+        }
+      },
+    },
+  };
+
+const RCbar = new Chart(RC, RCconfig);
+
+const FRC = document.getElementById("FRC").getContext("2d");
+const FRCdata = <?!=JSON.stringify(pivotCountsToChartDocStatusDataPercentage("For Review","#87a6ff"));?>;
+
+const FRCconfig = {
+    type: "bar",
+    data: FRCdata,
+    options: {
+      responsive: true,
+      plugins: {
+        datalabels: {
+          anchor: "middle",
+          color: function (context) {
+            return "white";
+          },
+          font: { size: 11 },
+          formatter: (value) => {
+            if (value === 0) {
+              return null; // or return "";
+            }
+            return value + "%";
+          },
+          offset: 2,
+          padding: 0,
+        },
+        legend: { display: false },
+        title: {
+          display: true,
+          text: "For Review",
+          color: "white",
+          font: {
+              size: 20
+          }
+        },
+        tooltip: customTooltipBar,
+      },
+      scales: {
+        x: { 
+          stacked: true,
+          ticks: {
+                    color: 'white', // Set Y-axis tick label color to white
+                    display: true
+                },
+          },
+        y: {
+          stacked: true,
+          max: 100,
+          ticks: {
+            callback: (value) => value + "%",
+            color: 'white'
+          },
+          grid: { color: "#666" }
+        }
+      },
+    },
+  };
+
+const FRCbar = new Chart(FRC, FRCconfig);
+
+const OC = document.getElementById("OC").getContext("2d");
+const OCdata = <?!=JSON.stringify(pivotCountsToChartDocStatusDataPercentage("Overdue","#ff7f0e"));?>;
+
+const OCconfig = {
+    type: "bar",
+    data: OCdata,
+    options: {
+      responsive: true,
+      plugins: {
+        datalabels: {
+          anchor: "middle",
+          color: function (context) {
+            return "white";
+          },
+          font: { size: 11 },
+          formatter: (value) => {
+            if (value === 0) {
+              return null; // or return "";
+            }
+            return value + "%";
+          },
+          offset: 2,
+          padding: 0,
+        },
+        legend: { display: false },
+        title: {
+          display: true,
+          text: "Overdue",
+          color: "white",
+          font: {
+              size: 20
+          }
+        },
+        tooltip: customTooltipBar,
+      },
+      scales: {
+        x: { 
+          stacked: true,
+          ticks: {
+                    color: 'white', // Set Y-axis tick label color to white
+                    display: true
+                },
+          },
+        y: {
+          stacked: true,
+          max: 100,
+          ticks: {
+            callback: (value) => value + "%",
+            color: 'white'
+          },
+          grid: { color: "#666" }
+        }
+      },
+    },
+  };
+ 
+  const OCbar = new Chart(OC, OCconfig);
+
+</script>

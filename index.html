@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top" />
+    <?!= include("index-css"); ?> 
+  </head>
+  <body>
+    <div class="container my-2">
+      <div class="d-flex justify-content-between">
+        <div class="col-4">
+          <?!= include("component-logo"); ?>
+        </div>
+        <div></div>
+        <div>
+          <h1>ISDP Dashboard</h1>
+        </div>
+      </div>
+      <div class="py-0">
+
+        <!-- Main container changed from bg-white to dark gray (bg-gray-800) -->
+        <div class="max-w-4xl mx-auto pl-6 pe-6 py-2 px-6 main-container">
+            <!-- Text color adjusted for dark theme -->
+
+            <!-- TAB NAVIGATION (The main menu strip) -->
+            <ul class="nav nav-tabs justify-content-end" id="myTab" role="tablist">
+                
+                <!-- Standard Tab 1 -->
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Main Dashboard</button>
+                </li>
+                
+                <!-- DROPDOWN for Details -->
+                <li class="nav-item dropdown" role="presentation">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" id="detailsDropdown">
+                        Details
+                    </a>
+                    
+                    <!-- The Dropdown Menu containing the actual Tab Triggers -->
+                    <ul class="dropdown-menu" aria-labelledby="detailsDropdown">
+                        <!-- Dropdown items use default dark theme colors -->
+                        <li>
+                            <a class="dropdown-item" href="#details-administrative-policy" data-bs-toggle="tab" role="tab" aria-controls="service-a" aria-selected="false">
+                                Administrative Policy
+                            </a>
+                        </li> 
+                        <li>
+                            <a class="dropdown-item" href="#details-eduction-awareness" data-bs-toggle="tab" role="tab" aria-controls="service-c" aria-selected="false">
+                                Education and Awareness
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#details-teckstack" data-bs-toggle="tab" role="tab" aria-controls="service-c" aria-selected="false">
+                                Teckstack
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- DROPDOWN for Settings -->
+                <li class="nav-item dropdown" role="presentation">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" id="settingsDropdown">
+                        Settings
+                    </a>
+                    
+                    <!-- The Dropdown Menu containing the actual Tab Triggers -->
+                    <ul class="dropdown-menu" aria-labelledby="settingsDropdown">
+                        <!-- Dropdown items use default dark theme colors -->
+                        <li>
+                            <a class="dropdown-item" href="#settings-manage-document" data-bs-toggle="tab" role="tab" aria-controls="service-a" aria-selected="false">
+                                Manage Document Review
+                            </a>
+                        </li> 
+                        <li>
+                            <a class="dropdown-item" href="#settings-manage-document-user" data-bs-toggle="tab" role="tab" aria-controls="service-a" aria-selected="false">
+                                Manage Document Review User
+                            </a>
+                        </li> 
+
+                        <li>
+                            <a class="dropdown-item" href="#settings-sync-manager" data-bs-toggle="tab" role="tab" aria-controls="sync-manager" aria-selected="false">
+                                Sync Manager
+                            </a>
+                        </li> 
+                        
+                    </ul>
+                </li>
+
+            </ul>
+
+            <!-- TAB CONTENT (Background changed from bg-gray-50 to dark gray bg-gray-700) -->
+            <div class="tab-content border-x border-b border-gray-700 rounded-b-xl p-6 bg-gray-700 mt-[-2px] shadow-inner">
+                
+                <!-- Content for Main Dashboard -->
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <?!= include("main"); ?>
+                </div>
+    
+                <!-- Content for Administrative Policy -->
+                <div class="tab-pane fade" id="details-administrative-policy" role="tabpanel" aria-labelledby="detailsDropdown">
+                    <?!= include("administrative-policy"); ?>
+                </div> 
+                
+                <!-- Content for Education and Awareness -->
+                <div class="tab-pane fade" id="details-eduction-awareness" role="tabpanel" aria-labelledby="detailsDropdown">
+                    <?!= include("education"); ?>
+                </div>
+
+                <!-- Content for Teckstack -->
+                <div class="tab-pane fade" id="details-teckstack" role="tabpanel" aria-labelledby="detailsDropdown">
+                    <?!= include("techstack"); ?>
+                </div>
+
+                <!-- Settings: Manage Document Review -->
+                <div class="tab-pane fade" id="settings-manage-document" role="tabpanel" aria-labelledby="settingsDropdown">
+                    <?!=include_object("document-list", list) ?>
+                </div>
+
+                <!-- Settings: Manage Document Review User-->
+                <div class="tab-pane fade" id="settings-manage-document-user" role="tabpanel" aria-labelledby="settingsDropdown">
+                    <?!= include("document-review-user"); ?>
+                </div> 
+
+                <!-- Settings: Upload Data-->
+                <div class="tab-pane fade" id="settings-sync-manager" role="tabpanel" aria-labelledby="sync-manager">
+                    <?!= include("sync-manager"); ?>
+                </div> 
+
+            </div>
+        </div> 
+        
+      </div>
+    </div>
+
+    <?!= include_object("document-modal-edit", list); ?>
+    <?!= include_object("document-modal-add", list); ?>
+    <?!= include("modal"); ?>
+    <?!= include("index-js"); ?>
+
+  </body>
+</html>

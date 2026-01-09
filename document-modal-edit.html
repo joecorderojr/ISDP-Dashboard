@@ -1,0 +1,164 @@
+<!-- Modal -->
+<div
+  class="modal modal-xl fade"
+  id="AddDocumentModal"
+  tabindex="-1"
+  aria-labelledby="AddDocumentModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="AddDocumentModalLabel">
+          Edit Document
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <!-- Column Left -->
+          <div class="col-6">
+            <!-- Unit -->
+            <div class="mb-3 row">
+              <label for="txtUnit" class="col-sm-4 col-form-label text-danger">Unit *</label>
+              <div class="col-sm-8">
+
+                  <div class="input-group">
+                    <input id="txtUnit" type="text" class="form-control" placeholder="select or type">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Select</button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                      <? 
+                        for (let i = 0; i < unit_list.length-1; i++) { 
+                      ?>
+                      <li><button type="button" class="dropdown-item btn btn-link" onclick="onSelectUnit(<?=unit_list[i]?>)"><?=unit_list[i]?></button>
+                      <?}?>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><span class="NotFound">Type if Not Found</span></li>
+                    </ul>
+                  </div>
+                  <label id="unit-error" class="text-danger collapse mt-1">Unit is required.</label>
+              </div>
+            </div>
+            <!-- Control No -->
+            <div class="mb-3 row">
+              <label for="txtControlNo" class="col-sm-4 col-form-label text-danger">Control No *</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="txtControlNo" />
+                <label id="control-error" class="text-danger collapse mt-1">Control No is required.</label>
+              </div>
+            </div>
+            <!-- Title -->
+            <div class="mb-3 row">
+              <label for="txtTitle" class="col-sm-4 col-form-label text-danger">Title *</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="txtTitle" />
+                <label id="title-error" class="text-danger collapse mt-1">Title is required.</label>
+              </div>
+            </div>
+            <!-- Description -->
+            <div class="mb-3 row">
+              <label for="txtDescription" class="col-sm-4 col-form-label">Description</label>
+              <div class="col-sm-8">
+                <textarea class="form-control" id="txtDescription"></textarea>
+              </div>
+            </div>
+            <!-- Type of Document -->
+            <div class="mb-3 row">
+              <label for="txtDocumentType" class="col-sm-4 col-form-label text-danger">Type of Document *</label>
+              <div class="col-sm-8">
+
+                  <div class="input-group">
+                    <input id="txtDocumentType" type="text" class="form-control" placeholder="select or type">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Select</button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                      <? 
+                        for (let i = 0; i < document_types.length-1; i++) { 
+                      ?>
+                      <li><button type="button" class="dropdown-item btn btn-link" onclick="onSelectDocumentType(<?=document_types[i]?>)"><?=document_types[i]?></button>
+                      <?}?>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><span class="NotFound">Type if Not Found</span></li>
+                    </ul>
+                  </div>
+                  <label id="type-error" class="text-danger collapse mt-1">Type of Document is required.</label>
+              </div>
+            </div>
+            <!-- Ammendment Date -->
+            <div class="mb-3 row">
+              <label for="txtAmmendmentDate" class="col-sm-4 col-form-label">Amendment Date</label>
+              <div class="col-sm-8">
+               <?!=include_picker("component-date-picker","txtAmmendmentDate");?>
+              </div>
+            </div>
+            <!-- Prepared by -->
+            <div class="mb-3 row">
+              <label for="txtPreparedBy" class="col-sm-4 col-form-label">Prepared by</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="txtPreparedBy" />
+              </div>
+            </div>
+            
+          </div>
+          <!-- Column Right -->
+          <div class="col-6">
+            <!-- Effective Date -->
+            <div class="mb-3 row">
+              <label for="txtEffectiveDate" class="col-sm-4 col-form-label">Effective Date</label>
+              <div class="col-sm-8">
+                <?!=include_picker("component-date-picker","txtEffectiveDate");?>
+              </div>
+            </div> 
+            <!-- Latest Version -->
+            <div class="mb-3 row">
+              <label for="txtLatestVersion" class="col-sm-4 col-form-label">Latest Version</label>
+              <div class="col-sm-8">
+                <input type="number" class="form-control" id="txtLatestVersion"/>
+              </div>
+            </div>
+            <!-- Retention Period -->
+            <div class="mb-3 row">
+              <label for="txtRetentionPeriod" class="col-sm-4 col-form-label">Retention Period</label>
+              <div class="col-sm-8">
+                <input
+                  type="number"
+                  class="form-control"
+                  id="txtRetentionPeriod"/>
+              </div>
+            </div>
+            <!-- Last Reviewed Date -->
+            <div class="mb-3 row">
+              <label for="txtLastReviewedDate" class="col-sm-4 col-form-label">Last Reviewed Date</label>
+              <div class="col-sm-8">
+                <?!=include_picker("component-date-picker","txtReviewDate");?>
+              </div>
+            </div>
+            <!-- Remarks -->
+            <div class="mb-3 row">
+              <label for="txtRemarks" class="col-sm-4 col-form-label">Remarks</label>
+              <div class="col-sm-8">
+                <textarea class="form-control" id="txtRemarks"></textarea>
+              </div>
+            </div>
+            <!-- Document Link -->
+            <div class="mb-3 row">
+              <label for="txtDocumentLink" class="col-sm-4 col-form-label text-danger">Document Link *</label>
+              <div class="col-sm-8">
+                <textarea class="form-control" id="txtDocumentLink"></textarea>
+                <label id="link-error" class="text-danger collapse mt-1">Document Link is required.</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" onclick="onSaveDocument()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

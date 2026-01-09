@@ -1,0 +1,93 @@
+<script> 
+  function onAddSelectUnit(data)
+  {
+    console.log("txtAddUnit")
+    $("#txtAddUnit").val(data);
+  }
+
+  function onAddSelectDocumentType(data)
+  {
+    $("#txtAddDocumentType").val(data);
+  }
+
+  function clearAddError()
+  {
+    $("#unit-add-error").hide();
+    $("#title-add-error").hide();
+    $("#control-add-error").hide();
+    $("#type-add-error").hide();
+    $("#link-add-error").hide();
+
+  }
+
+  function addDocument()
+  {
+    const data = {
+      unit: $("#txtAddUnit").val().trim(),
+      controlNo: $("#txtAddControlNo").val().trim(),
+      title: $("#txtAddTitle").val().trim(),
+      description: $("#txtAddDescription").val().trim(),
+      type: $("#txtAddDocumentType").val().trim(),
+      ammendmentDate: $("#txtAddAmmendmentDate").val().trim(),
+      preparedBy: $("#txtAddPreparedBy").val().trim(),
+      effectiveDate: $("#txtAddEffectiveDate").val().trim(),
+      latestVersion: $("#txtAddLatestVersion").val().trim(),
+      retentionPeriod: $("#txtAddRetentionPeriod").val().trim(),
+      lastReviewedDate: $("#txtAddReviewDate").val().trim(),
+      remarks: $("#txtAddRemarks").val().trim(),
+      documentLink: $("#txtAddDocumentLink").val().trim(),
+    };
+
+    google.script.run
+      .withSuccessHandler(() => {
+        alert("Record added successfully");
+      })
+      .withFailureHandler(function (error) {
+        console.error("Failed to add new document:", error.message);
+        alert("Failed to add new document");
+      })
+      .addNewRow(data);
+  }
+
+  function onAddDocument()
+  {
+    var hasError = false;
+
+    clearAddError();
+   
+    if($("#txtAddUnit").val().trim() == "")
+    {
+        $("unit-add-error").show();
+        hasError = true;
+    }
+
+    if($("#txtAddTitle").val().trim() == "")
+    {
+        $("#title-add-error").show();
+        hasError = true;
+    }
+
+    if($("#txtAddControlNo").val().trim() == "")
+    {
+        $("#control-add-error").show();
+        hasError = true;
+    }
+
+    if($("#txtAddDocumentType").val().trim() == "")
+    {
+        $("#type-add-error").show();
+        hasError = true;
+    }
+
+    if($("#txtAddDocumentLink").val().trim() == "")
+    {
+        $("#link-add-error").show();
+        hasError = true;
+    }
+
+    if(hasError) return;
+
+    $('#AddNewDocumentModal').modal('hide');
+    addDocument();
+  }
+</script>

@@ -1,0 +1,62 @@
+<div class="panel-title my-1 d-flex justify-content-between align-items-center">
+  <h4>Sync Manager</h4>
+  <span>Reload the page to see the latest data.</span>
+</div>
+
+<table class="table light">
+  <thead>
+    <tr>
+      <td scope="col"><b>Section</b></td>
+      <td scope="col"><b>Description</b></td>
+      <td scope="col" class="col-md-2"><b>Action</b></td>
+      <td scope="col" class="col-md-2"><b>Status</b></td> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td scope="row">Education and Awareness</td>
+      <td>Cyber Security 2025</td>
+      <td>
+        <button id="btnSyncCyber2025" type="button" class="btn btn-primary">Sync</button>
+      </td> 
+      <td><span id="lblSyncCyber2025"></span></td>
+    </tr>
+    <tr>
+      <td scope="row">Education and Awareness</td>
+      <td>Cyber Security 2024</td>
+      <td>
+        <button id="btnSyncCyber2024" type="button" class="btn btn-primary">Sync</button>
+      </td> 
+      <td><span id="lblSyncCyber2024"></span></td>
+    </tr>
+     
+  </tbody>
+</table>
+
+
+<div class="my-10">
+    <label for="formFile" class="form-label">VA Summary</label>
+    <div class="row">
+      <div class="col-12 row justify-content-between align-items">
+        <div class="col-4">
+          <input class="form-control" type="file" id="fileInputVASummary" accept=".xls,.xlsx,.csv">
+          <label id="upload-error" class="text-danger collapse mt-1">Please select a file</label>
+        </div>
+        <div class="col-4">
+          <input class="form-control" type="text" id="fileNameVASummary" placeholder="Enter file name">
+          <label id="upload-name-error" class="text-danger collapse mt-1">File name is required.</label>
+        </div>
+        <div class="col-4">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-target="#UploadVASummaryFile"
+            id="upload-btn"
+            onclick="upload()">
+            Upload File
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="upload-status"></div>
+  </div>

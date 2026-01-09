@@ -1,0 +1,141 @@
+<div class="panel-title my-5">
+  <h4>Document Review Matrix</h4>
+</div>
+<div class="dashboard-table-container">
+  
+  <table class="dashboard-table">
+      <thead>
+          <tr>
+              <th>Unit</th>
+              <th>For Review</th>
+              <th>Overdue</th>
+              <th>Reviewed</th>
+              <th>Total</th>
+              <th>% For Review</th>
+              <th>% Overdue</th>
+              <th>% Reviewed</th>
+          </tr>
+      </thead> 
+      <tbody>
+
+      <? 
+      let forReview = 0;
+      let overdue = 0;
+      let reviewed = 0;
+      
+      document_matrix.map(([unitName, unitData]) => { 
+        if(unitName) {?>
+      
+        <tr>
+          <td><?=unitName?></td>
+          <td>
+            <?
+              if(unitData["For Review"] === 0)
+              {
+            ?>
+               <span><?=unitData["For Review"]?></span>
+            <? }
+            else {
+            ?>
+            <button type="button" class="btn btn-link" data-bs-toggle="modal" 
+                    data-modal-type="document" 
+                    data-modal-unit="<?=unitName?>" 
+                    data-modal-status="For Review" 
+                    data-bs-target="#modalDocument">
+              <?=unitData["For Review"]?>
+            </button>
+
+            <?}?>
+            
+          </td>
+          <td>
+            <?
+              if(unitData["Overdue"] === 0)
+              {
+            ?>
+               <span><?=unitData["Overdue"]?></span>
+            <? }
+            else {
+            ?>
+            <button type="button" class="btn btn-link" 
+                    data-bs-toggle="modal" 
+                    data-modal-type="document" 
+                    data-modal-unit="<?=unitName?>" 
+                    data-modal-status="Overdue" 
+                    data-bs-target="#modalDocument">
+              <?=unitData["Overdue"]?>
+            </button>
+
+            <?}?>
+          </td>
+          <td>
+            <?
+              if(unitData["Reviewed"] === 0)
+              {
+            ?>
+               <span><?=unitData["Reviewed"]?></span>
+            <? }
+            else {
+            ?>
+            <button type="button" class="btn btn-link" 
+                    data-bs-toggle="modal" 
+                    data-modal-type="document" 
+                    data-modal-unit="<?=unitName?>" 
+                    data-modal-status="Reviewed" 
+                    data-bs-target="#modalDocument">
+              <?=unitData["Reviewed"]?>
+            </button>
+
+            <?}?>
+          </td>
+          <td>
+            <?
+              if(unitData["Total"] === 0)
+              {
+            ?>
+               <span><?=unitData["Total"]?></span>
+            <? }
+            else {
+            ?>
+            <button type="button" class="btn btn-link" 
+                    data-bs-toggle="modal" 
+                    data-modal-type="document" 
+                    data-modal-unit="<?=unitName?>" 
+                    data-modal-status="All" 
+                    data-bs-target="#modalDocument">
+              <?=unitData["Total"]?>
+            </button>
+
+            <?}?>
+          </td>
+          <td><?=unitData["For ReviewPercentage"]?>%</td>
+          <td><?=unitData.OverduePercentage?>%</td>
+          <td><?=unitData.ReviewedPercentage?>%</td>
+         
+        </tr>
+      <? 
+         forReview = forReview + unitData["For Review"];
+         overdue = overdue + unitData.Overdue;
+         reviewed = reviewed + unitData.Reviewed;
+      }}); 
+      
+      let total = forReview + overdue + reviewed;
+      let forReviewPercent = Math.floor((forReview / total) * 100);
+      let overduePercent =  Math.floor((overdue / total) * 100);
+      let reviewedPercent = 100 - forReviewPercent - overduePercent;
+      
+      ?>
+           
+          <tfoot class="total-row">
+              <td>Total</td>
+              <td class="number-cell"><?=forReview?></td>
+              <td class="number-cell"><?=overdue?></td>
+              <td class="number-cell"><?=reviewed?></td>
+              <td class="number-cell"><?=total?></td>
+              <td class="percentage-cell"><?=forReviewPercent?>%</td>
+              <td class="percentage-cell"><?=overduePercent?>%</td>
+              <td class="percentage-cell"><?=reviewedPercent?>%</td>
+          </tfoot>
+      </tbody>  
+  </table>
+</div>

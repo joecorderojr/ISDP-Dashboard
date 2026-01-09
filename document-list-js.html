@@ -1,0 +1,26 @@
+<script>
+  var selectedRow = 0;
+
+  function openEditModal(index)
+  {
+    selectedRow = index; 
+
+    clearError();
+
+    $("#txtDescription").val($("#lblDescription" + index).html());
+    $("#txtControlNo").val($("#lblControlNo" + index).html());
+    $("#txtTitle").val($("#lblTitle" + index).html());
+    $("#txtLatestVersion").val($("#lblLatestVersion" + index).html());
+    $("#txtRetentionPeriod").val($("#lblRetentionPeriod" + index).html());
+    $("#txtRemarks").val($("#lblRemarks" + index).html());
+    $("#txtPreparedBy").val($("#lblPreparedBy" + index).html());
+    $("#txtDocumentLink").val($("#lblDocumentLink" + index).html());
+    $("#txtAmmendmentDate").val(ValidDateDateFormat($("#lblAmmendmentDate" + index).html()));
+    $("#txtEffectiveDate").val(ValidDateDateFormat($("#lblEffectiveDate" + index).html()));
+    $("#txtReviewDate").val(ValidDateDateFormat($("#lblReviewDate" + index).html()));
+    $("#txtDocumentType").val($("#lblDocumentType" + index).html());
+    $("#txtUnit").val($("#lblUnit" + index).html());
+    
+  }
+
+</script>

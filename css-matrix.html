@@ -1,0 +1,89 @@
+<style>
+
+  .dashboard-table-container {
+        width: fit-content; /* Adjusts width to content */
+        margin: 20px auto;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        border-collapse: collapse;
+        color:black;
+    }
+    .dashboard-table {
+        border-collapse: collapse;
+        width: 100%;
+        background-color: #fff;
+    }
+
+    /* Table Headers */
+    .dashboard-table th {
+        background-color: #e0e0e0; /* Header background */
+        color: #333;
+        padding: 10px 15px;
+        text-align: center;
+        border: 1px solid #ccc;
+        font-weight: bold;
+        white-space: nowrap; /* Prevent headers from wrapping */
+    }
+    .dashboard-table th:first-child,
+    .dashboard-table th:nth-child(2),
+    .dashboard-table th:nth-child(3),
+    .dashboard-table th:nth-child(4),
+    .dashboard-table th:nth-child(5) 
+    {
+        text-align: left; /* 'Unit' header aligned left */
+        background-color: #42256c; /* Light blue for percentage headers */
+        color: white;
+    }
+    .dashboard-table th:nth-child(6), /* % For Review */
+    .dashboard-table th:nth-child(7), /* % Overdue */
+    .dashboard-table th:nth-child(8)  /* % Reviewed */
+    {
+        background-color: #6236a1; /* Light blue for percentage headers */
+        color: white;
+    }
+
+    tr:nth-child(even) td
+    {
+        background-color: #f4ddf5; 
+    }
+
+
+    /* Table Data Cells */
+    .dashboard-table td {
+        padding: 8px 15px;
+        text-align: center;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        white-space: nowrap; /* Prevent data from wrapping */
+    }
+    .dashboard-table td:first-child {
+        text-align: left; /* First column ('Unit') aligned left */
+        font-weight: bold; /* Unit names are bold */
+    }
+
+    /* Total Row Styling */
+    .dashboard-table tfoot.total-row {
+        background-color: #470135; /* Light gray background */
+        font-weight: bold;
+        font-size: 16px;
+        color: white;
+    }
+    .dashboard-table tfoot.total-row td {
+        background-color: #24043c; /* Ensure cells match row background */
+    }
+    .dashboard-table tfoot.total-row td:first-child {
+        text-align: left;
+    }
+
+
+    /* Specific cell styles for numbers and percentages */
+    .dashboard-table td.number-cell {
+        font-weight: bold;
+    }
+
+    /* Green text for 100% values */
+    .dashboard-table td.percentage-100 {
+        color: #008000; /* Green color */
+        font-weight: bold; /* Make 100% bold */
+    }
+
+</style>

@@ -1,0 +1,11 @@
+# Ignore clasp credentials and project settings
+.clasp.json
+
+# Ignore node modules
+/node_modules
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore VS Code settings
+.vscode/

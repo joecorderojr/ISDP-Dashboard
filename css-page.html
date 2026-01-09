@@ -1,0 +1,270 @@
+<style>
+
+/* Force scrollbars on the main body and containers */
+  html,
+  body,
+  .container,
+  .main-container {
+    overflow-y: auto !important; /* Allow vertical scrolling */
+    height: auto !important;     /* Allow height to grow with content */
+    background-color: #14161a;
+    color: white;
+    font-family: 'Montserrat' !important;
+  }
+ 
+ table, table td, table th {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+ }
+
+ .table thead th {
+  background-color: #f2f2f2 !important;
+  text-align: center;
+  vertical-align: middle;
+ }
+
+.montserrat-<uniquifier> {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+
+#company-logo {
+  height: 60px;
+}
+
+.control-no {
+  width:220px;
+}
+
+.unit {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.panel-title {
+    background-color: #340b3c;
+    padding: 10px 10px 10px 20px;
+}
+
+.panel-title h4 {
+  font-size: 20px !important;
+  margin: 0px;
+}
+
+.panel-title h3 {
+  font-size: 30px !important;
+  margin: 0px;
+}
+
+.main-graph-container {
+  cursor: pointer;
+}
+
+.grid-holder > a 
+ {
+    display: block;
+    color: white;
+    margin: 10px 0px 0px 20px;
+    text-decoration: none; 
+}
+
+grid-holder > a:hover {
+  color: #b356dd;
+}
+
+.grid-holder i {
+    margin-right: 10px !important;
+}
+
+
+.pie-chart-one {
+  padding-left: 20px;
+  padding-right: 10px;
+  height:300px;
+}
+
+ .accordion-collapse {
+  
+  background: linear-gradient(to bottom, white 0%, #f0f0f0 60%, #c0c0c0 100%);
+ }
+
+ td.overdue {
+  background-color: #FF9999;
+ }
+
+ td.for-review {
+    background-color: #E889E1;
+ }
+
+ .modal {
+  color: black; 
+ } 
+
+ textarea.form-control {
+  min-height: 5rem;
+}
+
+ .date-picker-container { max-width: 350px; margin-top: 20px; }
+
+ .NotFound {
+   padding-left:15px;
+   font-size:12px;
+   color: #606060;
+ } 
+
+/* Adjusted borders for dark theme contrast */
+.nav-tabs { 
+  border-bottom: 2px solid #374151; 
+  /* CONVERTED #14161a (RGB: 20, 22, 26) to RGBA with 0.9 opacity */
+  background-color: rgba(20, 22, 26, 0.9);
+  z-index: 1020; 
+}
+
+/* NEW CLASS: Simulates sticky behavior using position: fixed and centering */
+.is-sticky {
+    position: fixed;
+    top: 0;
+    /* CRUCIAL FIX: Center fixed element manually */
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* The width is set dynamically by JavaScript */
+    margin-top: 0 !important;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2); 
+    box-sizing: border-box; 
+}
+
+/* Adjust the main container padding to make space for the fixed header */
+.main-container {
+    padding-top: 1rem;
+    margin-top: 0;
+}
+
+/* Active tab styling: Primary Background (#0d6efd) and White Text */
+.nav-link.active { 
+    border-color: #0d6efd !important; 
+    color: #ffffff !important; /* White text for contrast on active tab */
+    
+    background-color: #0d6efd !important; /* PRIMARY COLOR (Bootstrap Blue) background */
+}
+
+/* Custom styling for all nav links */
+.nav-link { 
+    color: #9ca3af; /* Light gray text for inactive tabs */
+    border: 1px solid transparent;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    margin-bottom: -2px; 
+    transition: all 0.15s ease-in-out; 
+}
+
+/* --- INTERACTIVE STATES --- */
+
+/* Hover State: Change font color to white on hover for inactive tabs */
+.nav-link:not(.active):hover {
+    color: #ffffff !important;
+    border-color: #4b5563 #4b5563 #374151; 
+    background-color: #1f2937;
+}
+
+/* Focus State: Change font color to white when the tab link is focused (e.g., via keyboard) */
+.nav-link:not(.active):focus {
+    color: #ffffff !important;
+    border-color: #4b5563 #4b5563 #374151;
+    background-color: #1f2937;
+    /* Optional: Add a subtle focus ring for accessibility */
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); 
+}
+
+/* --- DROPDOWN OPEN OVERRIDE FIX --- */
+/* When the dropdown is open (.show), force the appearance back to the hover/neutral state */
+.nav-item.dropdown.show .nav-link {
+    color: #ffffff !important;
+    background-color: #1f2937 !important;
+    border-color: #4b5563 #4b5563 #374151 !important;
+}
+
+.dropdown-toggle::after { vertical-align: middle; }
+
+.nav-item.dropdown .nav-link {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+/* CUSTOM DROPDOWN STYLING FOR DARK THEME */
+.dropdown-menu {
+    background-color: #1f2937; /* Darker background for menu */
+    border: 1px solid #374151;
+    color: #fff;
+}
+.dropdown-item {
+    color: #d1d5db; /* Light text for items */
+}
+.dropdown-item:hover, .dropdown-item:focus {
+    background-color: #374151; /* Subtle hover effect */
+    color: #fff;
+}
+
+.tab-content {
+  min-height:400px !important;
+}
+
+#modalDocument tr:nth-child(even) td {
+  background-color: #f0f0f0; 
+}
+
+.tools tr:nth-child(even) td,
+.tools-main tr:nth-child(even) td {
+  background-color: transparent; 
+}
+
+.tools tr:nth-child(odd) td,
+.tools-main tr:nth-child(odd) td {
+  background-color: transparent; 
+}
+
+.tools td {
+  border: 1px solid #f0f0f0;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: white;
+  font-size: 12px;
+}
+
+.tools-main td {
+  border: 1px solid #f0f0f0;
+  color: white;
+  font-size: 11px;
+  padding: 0px;
+  padding-left: 2px;
+}
+
+.tools-main td:nth-child(n+2) {
+  text-align: center;
+}
+
+.tools td.barGreen,
+.tools-main td.barGreen {
+  background-color: rgba(75, 192, 192, 0.8) !important;
+}
+
+.tools td.barRed,
+.tools-main td.barRed  {
+  background-color: rgba(255, 99, 132, 0.8) !important;
+}
+
+.tools td.barYellow,
+.tools-main td.barYellow {
+  background-color: rgba(255, 205, 86, 0.8) !important;
+}
+
+.tools td.toolsData,
+.tools-main td.toolsData {
+  width: 20%;
+}
+ 
+
+</style>

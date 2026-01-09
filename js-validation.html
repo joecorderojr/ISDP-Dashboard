@@ -1,0 +1,47 @@
+<script>
+  function ValidDateDateFormat(dateString) {
+      if (!dateString) return "";
+
+      // Regular Expression: ^(\d{1,2})\/(\d{1,2})\/(\d{4})$
+      // Captures: (MM)/(DD)/(YYYY)
+      const dateRegex = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
+      const match = dateString.match(dateRegex);
+
+      if (!match) {
+        // 1. Fails if format is incorrect
+        return "";
+      }
+
+      // Extract captured components (match[1]=Month, match[2]=Day, match[3]=Year)
+      const month = parseInt(match[1], 10);
+      const day = parseInt(match[2], 10);
+      const year = parseInt(match[3], 10);
+
+      // 2. Basic month check
+      if (month < 1 || month > 12) {
+        return "";
+      }
+
+      // 3. Basic day check (must be between 1 and 31)
+      if (day < 1 || day > 31) {
+        return "";
+      }
+
+      // Get the number of days in the specific month
+      const daysInMonth = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+      // Handle leap year for February (month index 2)
+      if (month === 2) {
+        const isLeap = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+        daysInMonth[2] = isLeap ? 29 : 28;
+      }
+
+      // 4. Final check: is the day value greater than the max days for that month?
+      if (day > daysInMonth[month]) {
+        return "";
+      }
+      
+      // If all checks pass, return the original valid string
+      return dateString;
+    }
+</script>

@@ -1,0 +1,84 @@
+<script>
+  const customTooltipAggregator = (context) => {
+    // 1. Determine the index being hovered (using the first element of the context array)
+    const dataIndex = context[0].dataIndex;
+    const chart = context[0].chart;
+    const data = chart.data;
+    
+    let aggregatedData = [];
+    
+    // The datasets we want to show
+    // NOTE: This array MUST match the labels in the datasets below.
+    const allLabels = ['Reported Email', 'Clicked Link', 'Summited Data', 'Email Sent'];
+
+    // 2. Iterate through all datasets to find values at the hovered index
+    data.datasets.forEach((dataset) => {
+        const label = dataset.label;
+        if (allLabels.includes(label)) {
+            const value = dataset.data[dataIndex];
+            // Format the output string for the tooltip
+            aggregatedData.push(`${label}: ${value}`);
+        }
+    });
+    
+    // The 'afterBody' callback expects an array of strings (lines)
+    return aggregatedData;
+};
+
+
+const customTooltipBar = {
+  callbacks: {
+    label: function (context) {
+      const value = context.raw;
+
+      return [` Value: ${value}%`];
+    },
+  },
+  displayColors: true,
+};
+
+const customTooltipSingleBar = {
+  // Use 'index' mode to group all datasets for the same category label (bar)
+  mode: 'index',
+  intersect: false,
+  // Customization function
+  callbacks: {
+    // Override the title to show only the category label (e.g., "Admin")
+    title: function(tooltipItems) {
+      return tooltipItems[0].label;
+    },
+    // Override the label to show the dataset label and its value with "%"
+    label: function(tooltipItem) {
+      const label = tooltipItem.dataset.label || '';
+      const value = tooltipItem.formattedValue;
+      return label + ': ' + value + '%';
+    }
+  }
+};
+
+const customTooltipBarNoData = {
+  // Use 'nearest' mode to focus on a single dataset label instead of all items at the index
+  mode: 'nearest',
+  intersect: false,
+  // Customization function
+  callbacks: {
+    // Override the title to show only the category label (e.g., "Admin")
+    title: function(tooltipItems) {
+      return tooltipItems[0].label;
+    },
+    // Override the label to show the dataset label only if the value is not zero
+    label: function(tooltipItem) {
+      const value = tooltipItem.raw;
+      
+      // If the value is zero, return null to hide the label line entirely
+      if (value === 0) {
+        return null;
+      }
+
+      const label = tooltipItem.dataset.label || '';
+      return label;
+    }
+  }
+};
+
+</script>

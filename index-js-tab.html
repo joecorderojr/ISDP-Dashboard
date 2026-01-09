@@ -1,0 +1,123 @@
+<script> 
+    document.addEventListener('DOMContentLoaded', function() {
+
+      // 🐛 IMPORTANT: Since the h1 and padding are outside the sticky element, 
+      // we must adjust the stickyOffset to account for the h1 and padding.
+      // Wait a moment for layout to settle, then call setupStickyHeader
+      setTimeout(setupStickyHeader, 100); 
+
+      // Array containing mappings for reusable click handlers
+      const boxMappings = [
+          // [Box Element ID, Target Tab Content ID, Parent Dropdown Header ID]
+          { boxId: 'box-administrative', tabId: '#details-administrative-policy', dropdownId: 'detailsDropdown' },
+          { boxId: 'box-education', tabId: '#details-eduction-awareness', dropdownId: 'detailsDropdown' },
+          { boxId: 'box-techstack', tabId: '#details-teckstack', dropdownId: 'detailsDropdown' },
+          // Add more mappings here as you create new boxes/tabs
+      ];
+
+      boxMappings.forEach(mapping => {
+          const boxElement = document.getElementById(mapping.boxId);
+          if (boxElement) {
+              boxElement.addEventListener('click', function(event) {
+                  event.preventDefault(); 
+                  openDropdownTab(mapping.tabId, mapping.dropdownId);
+              });
+          }
+      });
+
+         
+    });
+
+    // --- GENERIC FUNCTION FOR OPENING NESTED TABS ---
+    /**
+     * Programmatically opens a specific tab pane located within a dropdown menu.
+     * * @param {string} targetTabId - The ID of the tab content pane to show (e.g., '#details-administrative-policy').
+     * @param {string} parentDropdownId - The ID of the main dropdown link/tab header (e.g., 'servicesDropdown').
+     */
+    function openDropdownTab(targetTabId, parentDropdownId) {
+        // 1. Find the target tab link element inside the dropdown
+        // We search for the anchor tag whose href matches the targetTabId
+        const targetTabElement = document.querySelector(`a[href="${targetTabId}"]`);
+        const parentDropdownLink = document.getElementById(parentDropdownId);
+        
+        if (!targetTabElement) {
+            console.error(`Error: Target tab element not found for ID: ${targetTabId}`);
+            return;
+        }
+
+        // 2. Programmatically show the target tab using the Bootstrap 5 Tab API
+        // This switches the content pane AND activates the parent tab header.
+        // This is the core fix to ensure the tab opens correctly.
+        new bootstrap.Tab(targetTabElement).show();
+
+        // 3. Manually hide the parent dropdown menu (if it was open)
+        if (parentDropdownLink) {
+            let dropdownInstance = bootstrap.Dropdown.getInstance(parentDropdownLink);
+            if (!dropdownInstance) {
+                // Initialize the dropdown instance if it doesn't exist yet
+                dropdownInstance = new bootstrap.Dropdown(parentDropdownLink);
+            }
+            // Explicitly hide the dropdown menu after the tab switch
+            dropdownInstance.hide();
+        }
+    }
+    // --- END GENERIC FUNCTION ---
+
+  // --- STICKY HEADER (JS Polyfill for IFRAME) ---
+  function setupStickyHeader() {
+      const mainContainer = document.querySelector('.main-container');
+      const navTabs = document.getElementById('myTab');
+      const tabContent = document.querySelector('.tab-content'); // Get the content element
+      if (!navTabs || !mainContainer || !tabContent) return;
+
+      // Get the initial position of the tabs relative to the body/document
+      const stickyOffset = navTabs.offsetTop;
+      
+      // Function to calculate and apply fixed style
+      const applyFixedStyle = () => {
+          // Read the current calculated width of the main content container
+          const containerWidth = mainContainer.offsetWidth; 
+          
+          // Apply this exact width to the sticky bar to match the card width
+          navTabs.style.width = `${containerWidth}px`; 
+      };
+
+      window.addEventListener('scroll', () => {
+          // Get the height of the tabs now to reserve the space
+          const navHeight = navTabs.offsetHeight;
+          
+          // window.scrollY gives the number of pixels the document is currently scrolled vertically
+          if (window.scrollY >= stickyOffset) {
+              if (!navTabs.classList.contains('is-sticky')) {
+                  // 1. Reserve the vertical space to prevent content snap
+                  // The original margin-top on .tab-content is -2px. We override it.
+                  tabContent.style.marginTop = `${navHeight - 2}px`;
+
+                  // 2. Set the correct width and apply fixed position
+                  applyFixedStyle(); 
+                  navTabs.classList.add('is-sticky');
+              }
+          } else {
+              if (navTabs.classList.contains('is-sticky')) {
+                  // 1. Remove fixed position
+                  navTabs.classList.remove('is-sticky');
+                  // 2. Clean up inline width style
+                  navTabs.style.width = '';
+                  // 3. Restore the original margin top
+                  tabContent.style.marginTop = '-2px';
+              }
+          }
+      });
+      
+      // Run on resize to ensure the sticky width updates if the iframe is resized
+      window.addEventListener('resize', () => {
+          if (navTabs.classList.contains('is-sticky')) {
+              applyFixedStyle();
+          }
+      });
+
+      // Initial width setup (important for subsequent resize events)
+      applyFixedStyle();
+  }
+  // --- END STICKY HEADER ---
+</script>

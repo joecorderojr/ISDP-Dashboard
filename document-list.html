@@ -1,0 +1,130 @@
+<div class="panel-title my-1 d-flex justify-content-between align-items-center">
+  <h4>Manage Document Review</h4>
+  <button
+    type="button"
+    class="btn btn-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#AddNewDocumentModal"
+    onclick="openAddModal()">
+    Add
+  </button>
+</div>
+
+ <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Unit</th>
+        <th>Control No</th>
+        <th>Title</th>
+        <th>Type of Document</th>
+        <th>Amendment Date</th>
+        <th>Review Status</th>
+      </tr>
+    </thead>
+
+    <? 
+    for (let i = 0; i < obj.length-1; i++) { 
+        var collapseid = "flush-collapse" + i;
+        var rowClass = "";
+        if(obj[i][12] === "Overdue")
+        {
+          rowClass = "overdue";
+        }
+        if(obj[i][12] === "For Review")
+        {
+          rowClass = "for-review";
+        }
+    ?>
+    <tr
+      data-bs-toggle="collapse"
+      data-bs-target="#<?=collapseid?>"
+      aria-expanded="false"
+      aria-controls="<?=collapseid?>">
+      <td class="unit"><?= i+1 ?></td>
+       <!-- Unit -->
+      <td class="unit"><span id="lblUnit<?=i?>"><?= obj[i][0] ?></span></td>
+      <!-- Control No -->
+      <td class="control-no"><span id="lblControlNo<?=i?>"><?= obj[i][1] ?></span></td>
+      <!-- Title -->
+      <td><span id="lblTitle<?=i?>"><?= obj[i][2] ?></span></td>
+      <!-- Type of Document -->
+      <td><span id="lblDocumentType<?=i?>"><?= obj[i][3] ?></span></td>
+      <!-- Amendment Date --> 
+      <td><span id="lblAmmendmentDate<?=i?>"><?= formatDateTimeJS(obj[i][7]) ?></span></td>
+      <!-- For Review Status -->
+      <td class="<?=rowClass?>"><?= obj[i][12] ?></td>
+    </tr>
+    <tr>
+      <td
+        id="<?=collapseid?>"
+        colspan="7"
+        class="accordion-collapse collapse">
+        <div>
+          <div class="row">
+            <label class="col-sm-2 col-form-label">Brief Decription</label>
+            <div class="col-sm-10">
+              <label id="lblDescription<?=i?>" class="col-form-label"><?= obj[i][4] ?></label>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-sm-2 col-form-label">Prepared by</label>
+            <div class="col-sm-10">
+              <label  id="lblPreparedBy<?=i?>" class="col-form-label"><?= obj[i][5] ?></label>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-sm-2 col-form-label">Effective Date</label>
+            <div class="col-sm-10">
+              <label  id="lblEffectiveDate<?=i?>" class="col-form-label"><?= formatDateTimeJS(obj[i][6]) ?></label>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-sm-2 col-form-label">Latest Version</label>
+            <div class="col-sm-10">
+              <label id="lblLatestVersion<?=i?>" class="col-form-label"><?= obj[i][8] ?></label>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-sm-2 col-form-label">Retention Period</label>
+            <div class="col-sm-10">
+              <label id="lblRetentionPeriod<?=i?>" class="col-form-label"><?= obj[i][10] ?></label>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-sm-2 col-form-label">Last Reviewed Date</label>
+            <div class="col-sm-10">
+              <label  id="lblReviewDate<?=i?>" class="col-form-label"><?= formatDateTimeJS(obj[i][11]) ?></label>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-sm-2 col-form-label">Remarks</label>
+            <div class="col-sm-10">
+              <label id="lblRemarks<?=i?>" class="col-form-label"><?= obj[i][13] ?></label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="d-flex justify-content-end">
+              <span id="lblDocumentLink<?=i?>" class="collapse"><?= obj[i][9] ?></span>
+              <button
+                type="button"
+                class="btn btn-primary me-2"
+                onclick="openDocument(<?= obj[i][9] ?>)">
+                View Document
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger"
+                data-bs-toggle="modal"
+                data-bs-target="#AddDocumentModal"
+                onclick="openEditModal(<?=i?>)">
+                Edit
+              </button>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <? } ?>
+  </table>
+ 

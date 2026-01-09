@@ -1,0 +1,26 @@
+<table class="table tools mt-4">
+      <tr>
+          <td>Tools & Platform Status Update</td>
+          <td class="toolsData">Status</td>
+          <td class="toolsData">Update</td>
+          <td class="toolsData">Contract</td>
+      </tr>
+    <? tools_matrix.map((obj, index) => {  
+      
+      if (obj[0]) {
+      
+        var colorStatus = getBarColors(obj[2]);
+        var colorUpdate = getBarColors(obj[3]);
+        var colorContract = getBarColors(obj[4]);
+          
+      ?>
+
+        <tr>
+          <td><?=obj[0]?></td>
+          <td class="<?!=colorStatus?>"><?=obj[2]?></td>
+          <td class="<?!=colorUpdate?>"><?=obj[3]?></td>
+          <td class="<?!=colorContract?>"><?=obj[4]?></td>
+        </tr>
+    <?}});?>
+
+    </table>

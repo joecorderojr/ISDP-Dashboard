@@ -1,0 +1,19 @@
+<div class="input-group" 
+     id="<?= rowId ?>" 
+     component-type="datePicker" 
+     data-td-target-input="nearest" 
+     data-td-toggle="datetimepicker_<?= rowId ?>">      
+      <input 
+         id="<?= datePickerId ?>"
+          type="text" 
+          class="form-control" 
+          data-td-target="#<?= rowId ?>" 
+          placeholder="MM/DD/YYYY"
+          value=""/>
+      <span 
+          class="input-group-text" 
+          data-td-target="#<?= rowId ?>" 
+          data-td-toggle="datetimepicker_<?= rowId ?>">
+          <i class="fa-solid fa-calendar"></i>
+      </span>
+  </div>

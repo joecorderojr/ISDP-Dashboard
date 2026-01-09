@@ -1,0 +1,404 @@
+<script>
+
+const ISOCS = document.getElementById('ISOCS').getContext('2d');
+const ISOCSMain = document.getElementById('ISOCSMain').getContext('2d');
+
+const ISOCSdata = {
+    labels: ['Complied', 'In Progress'], // Categories
+    datasets: [{
+        label: 'ISO Compliance Status',
+        data: <?!=JSON.stringify(iso_27001_compliance_data)?> ,
+        backgroundColor: [
+            'rgba(89, 51, 146, 0.7)',
+            'rgba(133, 77, 220, 0.7)'
+        ],
+        borderColor: [
+            'rgba(89, 51, 146, 1)',
+            'rgba(133, 77, 220, 1)'
+        ],
+        borderWidth: 1
+    }]
+};
+
+const ISOCSconfig = {
+    type: 'pie', // Specify the chart type
+    data: ISOCSdata,
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: true,
+                position: 'top',
+                labels: {
+                    color: 'white'
+                }
+            },
+            title: {
+                display: true,
+                text: 'ISO Compliance Status',
+                color: 'white'
+            },
+            tooltip: {
+                enabled: true,
+                callbacks: {
+                    // This function generates the text shown in the tooltip
+                    label: function(context) {
+                        const label = context.label || '';
+                        const value = context.raw || 0;
+                        return `${value}`; // Displays "Compliant: 75%"
+                    }
+                }
+            }
+        }
+    },
+};
+
+const ISOCSMainconfig = {
+    type: 'pie', // Specify the chart type
+    data: ISOCSdata,
+    options: {
+        responsive: true,
+        plugins: {
+            datalabels: { display: false },
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'ISO Compliance Status',
+                color: 'white'
+            },
+            tooltip: {
+                enabled: true,
+                callbacks: {
+                    // This function generates the text shown in the tooltip
+                    label: function(context) {
+                        const label = context.label || '';
+                        const value = context.raw || 0;
+                        return `${value}`; // Displays "Compliant: 75%"
+                    }
+                }
+            }
+        }
+    },
+};
+
+const ISOCSPieChart = new Chart(ISOCS, ISOCSconfig);
+const ISOCSMainPieChart = new Chart(ISOCSMain, ISOCSMainconfig);
+
+const ISOBUS = document.getElementById('ISOBUS').getContext('2d');
+const ISOBUSMain = document.getElementById('ISOBUSMain').getContext('2d');
+
+const ISO270001Data = {
+  labels: <?!= JSON.stringify(iso_27001_data.labels) ?>,
+  datasets: [
+    {
+      label: "For Review",
+      data: <?!= JSON.stringify(iso_27001_data.forReview) ?>,
+      backgroundColor: 'rgba(244,156,11, 0.7)',
+      borderColor: 'rgba(244,156,11, 1)',
+      borderWidth: 1
+    },
+    {
+      label: "Revised",
+      data: <?!= JSON.stringify(iso_27001_data.revised) ?>,
+      backgroundColor: 'rgba(0,90,255, 0.7)',
+      borderColor: 'rgba(0,90,255, 1)',
+      borderWidth: 1
+    },
+    {
+      label: "Overdue",
+      data: <?!= JSON.stringify(iso_27001_data.overdue) ?>,
+      backgroundColor: 'rgba(216, 59, 59, 0.7)',
+      borderColor: 'rgba(216, 59, 59, 1)',
+      borderWidth: 1
+    },
+  ]
+};
+
+const ISOBUSconfig = {
+    type: 'bar',
+    data: ISO270001Data,
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: true, // Show legend
+                position: 'top', // Legend position
+                labels: {
+                    color: 'white', // Legend text color
+                }
+            },
+            title: {
+                display: true,
+                text: 'ISO27001 Business Unit Status',
+                color: 'white'
+            },
+            tooltip: {
+                enabled: true, // Enable tooltips
+            }
+        },
+        scales: {
+            x: { 
+                ticks: {
+                    color: 'white', // Set Y-axis tick label color to white
+                    display: true
+                },
+                title: {
+                    display: false,
+                    text: 'Colors'
+                },
+                stacked: false // Bars are side-by-side (default)
+            },
+            y: { 
+                ticks: {
+                    color: 'white' // Set Y-axis tick label color to white
+                },
+                beginAtZero: true,
+                title: {
+                    display: true,
+                }
+            }
+        }
+    }
+};
+
+const ISOBUSMainconfig = {
+    type: 'bar',
+    data: ISO270001Data,
+    options: {
+        maintainAspectRatio: false,
+        layout: {
+            padding: 0 // Removes all internal padding to let the chart fill the div height
+        },
+        plugins: {
+            datalabels: { display: false },
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'ISO27001 Business Unit Status',
+                color: 'white'
+            },
+            tooltip: {
+                enabled: true, // Enable tooltips
+            }
+        },
+        scales: {
+            x: { 
+                ticks: {
+                    color: 'white', // Set Y-axis tick label color to white
+                    display: true
+                },
+                title: {
+                    display: false,
+                    text: 'Colors'
+                },
+                stacked: false // Bars are side-by-side (default)
+            },
+            y: { 
+                ticks: {
+                    color: 'white' // Set Y-axis tick label color to white
+                },
+                beginAtZero: true,
+                title: {
+                    display: true,
+                }
+            }
+        }
+    }
+};
+
+const ISOBUSChart = new Chart(ISOBUS, ISOBUSconfig);
+const ISOBUSMainChart = new Chart(ISOBUSMain, ISOBUSMainconfig);
+
+const SOC2TYPE2 = document.getElementById('SOC2TYPE2').getContext('2d');
+const SOC2TYPE2Main = document.getElementById('SOC2TYPE2Main').getContext('2d');
+
+const SOC2TYPE2data = {
+    labels: <?!= JSON.stringify(soc2Type2_data.labels) ?>,
+    datasets: [{
+        label: 'SOC2 TYPE2',
+        data: <?!= JSON.stringify(soc2Type2_data.values) ?>,
+        backgroundColor: [
+            'rgba(89, 51, 146, 0.7)',
+            'rgba(118, 68, 195, 0.7)',  
+            'rgba(133, 77, 220, 0.7)',
+            'rgba(89, 51, 146, 0.7)',
+            'rgba(118, 68, 195, 0.7)',  
+            'rgba(133, 77, 220, 0.7)',
+        ],
+        borderColor: [
+            'rgba(89, 51, 146, 1)',
+            'rgba(118, 68, 195, 1)',
+            'rgba(133, 77, 220, 1)',
+            'rgba(89, 51, 146, 1)',
+            'rgba(118, 68, 195, 1)',
+            'rgba(133, 77, 220, 1)'
+        ],
+        borderWidth: 1
+    }]
+};
+
+const SOC2TYPE2config = {
+    type: 'polarArea',
+    data: SOC2TYPE2data,
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: true,
+                position: 'top',
+                labels: {
+                    color: 'white',
+                    padding: 20,
+                    font: {
+                        size: 12
+                    }
+                }
+            },
+            title: {
+                display: true,
+                text: 'SOC2 TYPE2 Compliance Status',
+                color: 'white',
+                font: {
+                    size: 16,
+                    weight: 'bold'
+                }
+            },
+            tooltip: {
+                enabled: true,
+                callbacks: {
+                    label: function(context) {
+                        return ` ${context.label}: ${context.raw}%`;
+                    }
+                }
+            }
+        },
+        scales: {
+            r: {
+                // Radial scale configuration
+                min: 0,
+                max: 100,
+                beginAtZero: true,
+                grid: {
+                    color: 'rgba(255, 255, 255, 0.2)' // Increased visibility for polar effect
+                },
+                angleLines: {
+                    display: true,
+                    color: 'rgba(255, 255, 255, 0.2)' // Lines that separate the sectors
+                },
+                ticks: {
+                    display: false, // Hides numbers on the concentric circles
+                    stepSize: 20
+                },
+                pointLabels: {
+                    display: true, // Show labels around the perimeter
+                    color: 'white',
+                    font: {
+                        size: 11
+                    }
+                }
+            }
+        }
+    }
+};
+
+const SOC2TYPE2Mainconfig = {
+    type: 'polarArea',
+    data: SOC2TYPE2data,
+    options: {
+        responsive: true,
+        plugins: {
+            datalabels: { display: false },
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'SOC2 TYPE2 Compliance Status',
+                color: 'white',
+                font: {
+                    size: 16,
+                    weight: 'bold'
+                }
+            },
+            tooltip: {
+                enabled: true,
+                callbacks: {
+                    label: function(context) {
+                        return ` ${context.label}: ${context.raw}%`;
+                    }
+                }
+            }
+        },
+        scales: {
+            r: {
+                // Radial scale configuration
+                min: 0,
+                max: 100,
+                beginAtZero: true,
+                grid: {
+                    color: 'rgba(255, 255, 255, 0.2)' // Increased visibility for polar effect
+                },
+                angleLines: {
+                    display: true,
+                    color: 'rgba(255, 255, 255, 0.2)' // Lines that separate the sectors
+                },
+                ticks: {
+                    display: false, // Hides numbers on the concentric circles
+                    stepSize: 20
+                },
+                pointLabels: {
+                    display: false, // Show labels around the perimeter
+                }
+            }
+        }
+    }
+};
+
+const SOC2TYPE2PieChart = new Chart(SOC2TYPE2, SOC2TYPE2config);
+const SOC2TYPE2MainPieChart = new Chart(SOC2TYPE2Main, SOC2TYPE2Mainconfig);
+
+
+const DPAMain = document.getElementById("DPAMain").getContext("2d");
+const DPAMainData = {
+  labels: <?!= JSON.stringify(npc_checklist_data.labels) ?>,
+  datasets: [
+    {
+      data: <?!= JSON.stringify(npc_checklist_data.values) ?>,
+      backgroundColor: ["#6236a1", "#42256c", "#916f93"],
+      hoverOffset: 4,
+      borderColor: [
+            'rgba(89, 51, 146, 1)',
+            'rgba(133, 77, 220, 1)'
+      ],
+      borderWidth: 1
+    },
+    
+  ],
+};
+const DPAMainconfig = {
+    type: 'pie',
+    data: DPAMainData,
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: true,
+                position: 'top',
+                labels: {
+                    color: 'white',
+                }
+            },
+            title: {
+                display: true,
+                text: 'Data Privacy Act (DPA) of 2012',
+                color: 'white'
+            },
+            tooltip: {
+                enabled: true
+            }
+        }
+    },
+};
+ 
+const DPAchartMain = new Chart(DPAMain, DPAMainconfig);
+
+</script>

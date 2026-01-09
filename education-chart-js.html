@@ -1,0 +1,352 @@
+<script>
+
+const DP101 = document.getElementById('DP101').getContext('2d');
+const DP101Main = document.getElementById('DP101Main').getContext('2d'); 
+
+const DP101data = {
+    labels: ['Completed', 'Incomplete'], // Categories
+    datasets: [{
+        label: 'Data Privacy 101',
+        data: [<?!=dataPrivacyTrainingsTotal.completedCount?>, <?!=dataPrivacyTrainingsTotal.inProgressCount?>], // Values for each category
+        backgroundColor: [
+            'rgba(108,59,170, 0.7)',
+            'rgba(157,0,255, 0.7)',
+            'rgba(86,5,145, 0.7)',
+            'rgba(204,204,255, 0.7)',
+            'rgba(138,0,196, 0.7)'
+        ],
+        borderColor: [
+            'rgba(55,37,40, 1)',
+            'rgba(55,37,40, 1)',
+            'rgba(55,37,40, 1)',
+            'rgba(55,37,40, 1)',
+            'rgba(55,37,40, 1)',
+        ],
+        borderWidth: 1
+    }]
+};
+
+const DP101config = {
+    type: 'pie', // Specify the chart type
+    data: DP101data,
+    options: {
+        responsive: true,
+        plugins: {
+            datalabels: {
+            color: "white",
+            font: {
+              size: 14,
+            }
+          },
+          legend: {
+              display: true,
+              position: 'top',
+              labels: {
+                  color: 'white', // Legend text color
+              }
+          },
+          title: {
+              display: true,
+              text: 'Data Privacy 101',
+              color: 'white',
+              font: {
+                size: 20
+              }
+          },
+          tooltip: customTooltipDonut
+        }
+    },
+};
+
+const DP101Mainconfig = {
+    type: 'pie', // Specify the chart type
+    data: DP101data,
+    options: {
+        responsive: true,
+        plugins: {
+            datalabels: { display: false },
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'Data Privacy 101',
+                color: 'white'
+            },
+            tooltip: customTooltipDonutMain
+        }
+    },
+};
+
+
+const DP101PieChart = new Chart(DP101, DP101config);
+const DP101MainPieChart = new Chart(DP101Main, DP101Mainconfig);
+
+
+const C101ET = document.getElementById('C101ET').getContext('2d');
+const C101ETMain = document.getElementById('C101ETMain').getContext('2d');
+
+const C101ETdata = {
+    labels: ['Completed', 'Incomplete-Missing', 'In-Progress'], // Categories
+    datasets: [{
+        label: 'Cybersecurity 101',
+        data: [<?!= cyberSecurityTrainingsTotal2025.completedTotal ?>, <?!= cyberSecurityTrainingsTotal2025.incompleteMissing ?>, <?!= cyberSecurityTrainingsTotal2025.inProgressCount ?>], // Values for each category
+        backgroundColor: [
+            'rgba(108,59,170, 0.7)',
+            'rgba(157,0,255, 0.7)',
+            'rgba(86,5,145, 0.7)',
+            'rgba(204,204,255, 0.7)',
+            'rgba(138,0,196, 0.7)'
+        ],
+        borderColor: [
+            'rgba(89, 51, 146, 1)',
+            'rgba(133, 77, 220, 1)',
+            'rgba(89, 51, 146, 1)',
+            'rgba(133, 77, 220, 1)'
+        ],
+        borderWidth: 1
+    }]
+};
+
+const C101ETconfig = {
+    type: 'pie', // Specify the chart type
+    data: C101ETdata,
+    options: {
+        responsive: true,
+        plugins: {
+            datalabels: {
+            color: "white",
+            font: {
+              size: 14,
+            }
+          },
+          legend: {
+              display: true,
+              position: 'top',
+              labels: {
+                  color: 'white', // Legend text color
+              }
+          },
+          title: {
+              display: true,
+              text: 'Cybersecurity 101',
+              color: 'white',
+              font: {
+                size: 20
+              }
+          },
+          tooltip: customTooltipDonut
+        }
+    },
+};
+
+const C101ETMainconfig = {
+    type: 'pie', // Specify the chart type
+    data: C101ETdata,
+    options: {
+        responsive: true,
+        plugins: {
+            datalabels: { display: false },
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'Cybersecurity 101',
+                color: 'white'
+            },
+            tooltip: customTooltipDonutMain
+        }
+    },
+};
+
+const C101ETPieChart = new Chart(C101ET, C101ETconfig);
+const C101ETMainPieChart = new Chart(C101ETMain, C101ETMainconfig);
+
+const PR = document.getElementById('PR').getContext('2d');
+const PRMain = document.getElementById('PRMain').getContext('2d');
+
+const PRdata = {
+  labels: <?!= JSON.stringify(phishingResult.labels)?>, // X-axis labels
+  datasets: [
+    {
+      label: "Email Sent", // Dataset 1 label ['Email Sent','Reported Email', 'Clicked Link', 'Summited Data'];
+      data: <?!= JSON.stringify(phishingResult.emailSent)?>, // Dataset 1 data
+      backgroundColor: "rgba(255,195,2, 0.7)", // Dataset 1 bar color
+      borderColor: "rgba(255,143,0, 1)",
+      borderWidth: 1,
+    },
+    //{
+    //  label: "Reported Email", // Dataset 2 label
+    //  data: <?!= JSON.stringify(phishingResult.reportedEmail)?>, // Dataset 2 data
+    //  backgroundColor: "rgba(255,246,0, 0.7)", // Dataset 2 bar color
+    //  borderColor: "rgba(229,221,0, 1)",
+    //  borderWidth: 1,
+    //},
+    //{
+    //  label: "Clicked Link", // Dataset 1 label
+     // data: <?!= JSON.stringify(phishingResult.clickedLink)?>, // Dataset 1 data
+    //  backgroundColor: "rgba(65,251,58, 0.7)", // Dataset 1 bar color
+    //  borderColor: "rgba(34,187,51, 1)",
+     // borderWidth: 1,
+   // },
+    {
+      label: "Summited Data", // Dataset 1 label
+      data: <?!= JSON.stringify(phishingResult.submittedData)?>, // Dataset 1 data
+      backgroundColor: "rgba(255,91,0, 0.7)", // Dataset 1 bar color
+      borderColor: "rgba(255,5,5, 1)",
+      borderWidth: 1,
+    },
+  ],
+};
+
+const PRconfig = {
+  type: "bar",
+  data: PRdata,
+  options: {
+    responsive: true,
+    plugins: {
+      datalabels: {
+        color: "white", // Set data labels color to white
+        anchor: "end", // Position the label at the end of the bar
+        align: "end",
+        formatter: (value) => {
+            // Optional: Hide zero values
+            return value === 0 ? null : value;
+        },
+      },
+      legend: {
+        display: true, // Show legend
+        position: "top", // Legend position
+        labels: {
+          color: "white",
+        },
+      },
+      title: {
+        display: true,
+        text: "Phishing Results",
+        color: "white",
+        font: {
+                size: 20
+              }
+      },
+      tooltip: {
+        enabled: true,
+        mode: 'index', // Ensure all datasets at the index are processed
+        intersect: false, // Must be false for index mode to work correctly on stacked/grouped bars
+        callbacks: {
+            // Removed beforeBody as it was unnecessary
+            
+            // Use afterBody to inject the full aggregated data from all datasets
+            afterBody: (context) => {
+                // This function contains the logic to gather all four data points
+                // context is an array of tooltip items (data points)
+                return customTooltipAggregator(context);
+            },
+            // Use the label callback to return a blank string, suppressing the default per-dataset content
+            label: (context) => {
+                return '';
+            }
+        },
+      },
+    },
+    scales: {
+      x: {
+        ticks: {
+          color: "white", // Set Y-axis tick label color to white
+          display: true,
+        },
+        title: {
+          display: false,
+          text: "Colors",
+        },
+        stacked: false, // Bars are side-by-side (default)
+      },
+      y: {
+        ticks: {
+          color: "white", // Set Y-axis tick label color to white
+        },
+        beginAtZero: true,
+        title: {
+          display: false,
+        },
+      },
+    },
+  },
+};
+
+const PRMainconfig = {
+  type: "bar",
+  data: PRdata,
+  options: {
+    responsive: true,
+    plugins: {
+      datalabels: {
+        color: "white", // Set data labels color to white
+        anchor: "end", // Position the label at the end of the bar
+        align: "end",
+        formatter: (value) => {
+            // Optional: Hide zero values
+            return value === 0 ? null : value;
+        },
+      },
+      legend: {
+        display: true, // Show legend
+        position: "top", // Legend position
+        labels: {
+          color: "white",
+        },
+      },
+      title: {
+        display: true,
+        text: "Phishing Results",
+        color: "white",
+      },
+      tooltip: {
+        enabled: true,
+        mode: 'index', // Ensure all datasets at the index are processed
+        intersect: false, // Must be false for index mode to work correctly on stacked/grouped bars
+        callbacks: {
+            // Removed beforeBody as it was unnecessary
+            
+            // Use afterBody to inject the full aggregated data from all datasets
+            afterBody: (context) => {
+                // This function contains the logic to gather all four data points
+                // context is an array of tooltip items (data points)
+                return customTooltipAggregator(context);
+            },
+            // Use the label callback to return a blank string, suppressing the default per-dataset content
+            label: (context) => {
+                return '';
+            }
+        },
+      },
+    },
+    scales: {
+      x: {
+        ticks: {
+          color: "white", // Set Y-axis tick label color to white
+          display: true,
+        },
+        title: {
+          display: false,
+          text: "Colors",
+        },
+        stacked: false, // Bars are side-by-side (default)
+      },
+      y: {
+        ticks: {
+          color: "white", // Set Y-axis tick label color to white
+        },
+        beginAtZero: true,
+        title: {
+          display: false,
+          text: "Votes",
+        },
+      },
+    },
+  },
+};
+
+const PRChart = new Chart(PR, PRconfig);
+const PRMainChart = new Chart(PRMain, PRMainconfig);
+
+
+
+</script>

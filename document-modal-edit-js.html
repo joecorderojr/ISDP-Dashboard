@@ -1,0 +1,109 @@
+<script> 
+  function onSelectDocumentType(data)
+  {
+    $("#txtDocumentType").val(data);
+  }
+
+  function onSelectUnit(data)
+  {
+    $("#txtUnit").val(data);
+  }
+
+  function clearError()
+  {
+    $("#unit-error").hide();
+    $("#title-error").hide();
+    $("#control-error").hide();
+    $("#type-error").hide();
+    $("#link-error").hide();
+
+  }
+
+  function saveRow(index) {
+    const rowNumber = parseInt(index) + 2;
+  
+    const data = {
+      unit: $("#txtUnit").val().trim(),
+      controlNo: $("#txtControlNo").val().trim(),
+      title: $("#txtTitle").val().trim(),
+      description: $("#txtDescription").val().trim(),
+      type: $("#txtDocumentType").val().trim(),
+      ammendmentDate: $("#txtAmmendmentDate").val().trim(),
+      preparedBy: $("#txtPreparedBy").val().trim(),
+      effectiveDate: $("#txtEffectiveDate").val().trim(),
+      latestVersion: $("#txtLatestVersion").val().trim(),
+      retentionPeriod: $("#txtRetentionPeriod").val().trim(),
+      lastReviewedDate: $("#txtReviewDate").val().trim(),
+      remarks: $("#txtRemarks").val().trim(),
+      documentLink: $("#txtDocumentLink").val().trim(),
+    };
+
+    google.script.run
+      .withSuccessHandler(() => {
+        alert("Record updated successfully");
+      })
+      .withFailureHandler(function (error) {
+        console.error("Apps Script Error:", error.message);
+        alert(error.message);
+      })
+      .updateSheetRow(data, rowNumber);
+  }
+
+  function onSaveDocument()
+  {
+    var index = selectedRow;
+    var hasError = false;
+
+    clearError();
+   
+    if($("#txtUnit").val().trim() == "")
+    {
+        $("#unit-error").show();
+        hasError = true;
+    }
+
+    if($("#txtTitle").val().trim() == "")
+    {
+        $("#title-error").show();
+        hasError = true;
+    }
+
+    if($("#txtControlNo").val().trim() == "")
+    {
+        $("#control-error").show();
+        hasError = true;
+    }
+
+    if($("#txtDocumentType").val().trim() == "")
+    {
+        $("#type-error").show();
+        hasError = true;
+    }
+
+    if($("#txtDocumentLink").val().trim() == "")
+    {
+        $("#link-error").show();
+        hasError = true;
+    }
+
+    if(hasError) return;
+
+
+    $("#lblDescription" + index).html($("#txtDescription").val().trim());
+    $("#lblControlNo" + index).html($("#txtControlNo").val().trim());
+    $("#lblTitle" + index).html($("#txtTitle").val().trim());
+    $("#lblLatestVersion" + index).html($("#txtLatestVersion").val().trim());
+    $("#lblRetentionPeriod" + index).html($("#txtRetentionPeriod").val().trim());
+    $("#lblRemarks" + index).html($("#txtRemarks").val().trim());
+    $("#lblPreparedBy" + index).html($("#txtPreparedBy").val().trim());
+    $("#lblDocumentLink" + index).html($("#txtDocumentLink").val().trim());
+    $("#lblAmmendmentDate" + index).html($("#txtAmmendmentDate").val().trim());
+    $("#lblEffectiveDate" + index).html($("#txtEffectiveDate").val().trim());
+    $("#lblReviewDate" + index).html($("#txtReviewDate").val().trim());
+    $("#lblDocumentType" + index).html($("#txtDocumentType").val().trim());
+    $("#lblUnit" + index).html($("#txtUnit").val().trim());
+
+    $('#AddDocumentModal').modal('hide');
+    saveRow(index);
+  }
+</script>

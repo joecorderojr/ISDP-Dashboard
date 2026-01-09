@@ -1,0 +1,35 @@
+<script> 
+  var document_list = <?!=JSON.stringify(document_list, null, 2)?>;
+  var dataPrivacyTrainings = <?!=JSON.stringify(dataPrivacyTrainingsList, null, 2)?>;
+  var cyberSecurityTrainingsList2025 = <?!=JSON.stringify(cyberSecurityTrainingsList2025, null, 2)?>;
+  var cyberSecurityTrainingsList2024 = <?!=JSON.stringify(cyberSecurityTrainingsList2025, null, 2)?>;
+  
+  function openDocument(url)
+  {
+    window.open(url, '_blank'); 
+  }
+ 
+  // Function to measure and send the height
+  function resizeIframe() {
+    // 1. Calculate the total content height, including the scrollable area
+    const height = document.body.scrollHeight;
+     
+    
+    // 2. Use postMessage to send the height value to the parent window
+    // Google Sites automatically listens for this message to adjust the iframe.
+    window.parent.postMessage({ height: height }, '*');
+  }
+
+  const height = document.body.scrollHeight;
+
+  // A. Run resize when the page first loads
+  window.onload = resizeIframe;
+  
+  // B. Run resize whenever the window dimensions change
+  window.onresize = resizeIframe;
+
+  // C. (Recommended) Set an interval to periodically check for height changes,
+  // especially if content loads dynamically (e.g., fetch, user actions).
+  setInterval(resizeIframe, 500); // Check every 500 milliseconds
+
+</script>

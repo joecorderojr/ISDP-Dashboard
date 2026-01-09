@@ -1,0 +1,155 @@
+<script>
+
+const Q2S = document.getElementById('Q2S').getContext('2d');
+const Q2SMain = document.getElementById('Q2SMain').getContext('2d');
+
+const colors = {
+    critical: 'rgba(153, 27, 27, 1)',
+    high: 'rgba(194, 65, 12, 1)',
+    medium: 'rgba(161, 98, 7, 1)',
+    low: 'rgba(21, 128, 61, 1)'
+  };
+  
+  const Q2Sdata = {
+    labels: ['Critical', 'High', 'Medium', 'Low'],
+    datasets: [
+      {
+        data: <?!=vaSummary_data?>, 
+        backgroundColor: [
+          colors.critical,
+          colors.high,
+          colors.medium,
+          colors.low
+        ],
+        borderColor: [
+          colors.critical,
+          colors.high,
+          colors.medium,
+          colors.low
+        ],
+        borderWidth: 1,
+        borderRadius: 4,
+        datalabels: {
+          color: 'white',
+          display: true
+        }
+      },
+      
+    ],
+  }; 
+
+const Q2SdataMain = {
+    labels: ['C', 'H', 'M', 'L'],
+    datasets: [
+      {
+        data: <?!=vaSummary_data?>, 
+        backgroundColor: [
+          colors.critical,
+          colors.high,
+          colors.medium,
+          colors.low
+        ],
+        borderColor: [
+          colors.critical,
+          colors.high,
+          colors.medium,
+          colors.low
+        ],
+        borderWidth: 1,
+        borderRadius: 4,
+        datalabels: {
+          color: 'white',
+          display: true
+        }
+      },
+      
+    ],
+  }; 
+
+const Q2config = {
+    type: 'bar', // Specify chart type
+    data: Q2Sdata,
+    options: {
+        responsive: true,
+        plugins: {
+            legend: { display: false  },
+            title: {
+                display: true,
+                text: 'VA Summary',
+                color: 'white'
+            },
+            tooltip: {
+                enabled: true
+            }
+        },
+        scales: {
+            x: { 
+                ticks: {
+                    color: 'white', // Set Y-axis tick label color to white
+                    display: true
+                },
+                title: {
+                    display: false,
+                    
+                }
+            },
+            y: { 
+                ticks: {
+                    color: 'white' // Set Y-axis tick label color to white
+                },
+                title: {
+                    display: false,
+                },
+                beginAtZero: true // Start Y-axis from zero
+            }
+        }
+    }
+};
+
+const Q2Mainconfig = {
+    type: 'bar', // Specify chart type
+    data: Q2Sdata,
+    options: {
+        responsive: true,
+        plugins: {
+            datalabels: { display: false },
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'VA Summary',
+                color: 'white'
+            },
+            tooltip: {
+                enabled: true
+            }
+        },
+        scales: {
+            x: { 
+                ticks: {
+                    color: 'white', // Set Y-axis tick label color to white
+                    display: true
+                },
+                title: {
+                    display: false,
+                    
+                }
+            },
+            y: { 
+                ticks: {
+                    color: 'white', // Set Y-axis tick label color to white
+                    display: false
+                },
+                title: {
+                    display: false,
+                },
+                beginAtZero: true // Start Y-axis from zero
+            }
+        }
+    }
+};
+
+const Q2Schart = new Chart(Q2S, Q2config);
+const Q2SMainchart = new Chart(Q2SMain, Q2Mainconfig);
+
+  
+</script>

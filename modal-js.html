@@ -1,0 +1,207 @@
+<script>
+
+  function formatDateManual(isoString) {
+      const date = new Date(isoString);
+
+      // Check if the date is valid (NaN check for getTime)
+      if (isNaN(date.getTime())) {
+        return isoString;
+      }
+
+      // Extract month, day, and year using UTC to avoid timezone shifts
+      // getUTCMonth is 0-indexed, so we add 1
+      const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+      const day = String(date.getUTCDate()).padStart(2, '0');
+      const year = date.getUTCFullYear();
+
+      return `${month}/${day}/${year}`;
+    }
+ 
+ const modalDocument = document.getElementById('modalDocument')
+ modalDocument.addEventListener('show.bs.modal', event => {
+     
+     const button = event.relatedTarget;
+     const type = button.getAttribute('data-modal-type');
+
+     const unitName = button.getAttribute('data-modal-unit');
+     const status = button.getAttribute('data-modal-status');
+
+     if(type === "document")
+     {
+        const filtered = document_list.filter(item => {
+            const isStatus = status === "All" || item[12] === status;
+            const isUnit = item[0] === unitName;
+            
+            // Return true only if BOTH conditions are true
+            return isUnit && isStatus;
+        });
+
+          var row = "";
+          filtered.forEach((item, index) => {
+
+                row = row + `
+                      <tr>
+                            <td scope="row">${item[0]}</td>
+                            <td>${item[1]}</td>
+                            <td>${item[2]}</td>
+                            <td class="text-center">${item[3]}</td>
+                            <td class="text-center">${formatDateManual(item[7])}</td>
+                            <td class="text-center"><a href="${item[9]}" target="_blank">View</a></td>
+                      </tr>
+                  `; 
+          });
+
+          $("#modal-body").html(`<table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Unit</th>
+                    <th scope="col">Control #</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Last Ammendment</th>
+                    <th scope="col">Document</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${row}
+                </tbody>
+              </table>`);
+     }
+     else if(type === "data privacy")
+     {
+
+        const filtered = dataPrivacyTrainings.filter(item => {
+            const isStatus = item.status === status;
+            const isUnit = item.businessunit === unitName;
+            
+            // Return true only if BOTH conditions are true
+            return isUnit && isStatus;
+        });
+ 
+          var row = "";
+          filtered.forEach((item, index) => {
+
+                row = row + `
+                      <tr>
+                            <td scope="row">${item.ee}</td>
+                            <td>${item.name}</td>
+                            <td>${item.position}</td>
+                            <td class="text-center">${item.businessunit}</td>
+                            <td class="text-center">${item.subunit}</td>
+                            <td class="text-center">${item.email}</td>
+                      </tr>
+                  `; 
+          });
+
+        $("#modal-body").html(`<table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">EE Code</th>
+                    <th scope="col">Name #</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Business Unit</th>
+                    <th scope="col">Sub-Unit</th>
+                    <th scope="col">Email Address</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${row}
+                </tbody>
+              </table>`);
+     }
+     else if (type === "cybersecurity 2025")
+     {
+        const filtered = cyberSecurityTrainingsList2025.filter(item => {
+            var isStatus = item.status === status;
+            const isUnit = item.businessunit === unitName;
+
+            if (status === "Completed" && (item.status === "Completed - Late" || item.status === "Completed"))
+            {
+              isStatus = true;
+            }
+
+            // Return true only if BOTH conditions are true
+            return isUnit && isStatus;
+        });
+ 
+          var row = "";
+          filtered.forEach((item, index) => {
+
+                row = row + `
+                      <tr>
+                            <td scope="row">${item.businessunit}</td>
+                            <td>${item.name}</td>
+                            <td>${item.position}</td>
+                            <td class="text-center">${item.email}</td>
+                            <td class="text-center">${item.status}</td>
+                            <td class="text-center">${item.score}</td>
+                      </tr>
+                  `; 
+          });
+
+        $("#modal-body").html(`<table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Business Unit</th>
+                    <th scope="col">Name #</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Email Address</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${row}
+                </tbody>
+              </table>`);
+     }
+     else if (type === "cybersecurity 2024")
+     {
+        const filtered = cyberSecurityTrainingsList2024.filter(item => {
+            var isStatus = item.status === status;
+            const isUnit = item.businessunit === unitName;
+
+            if (status === "Completed" && (item.status === "Completed - Late" || item.status === "Completed"))
+            {
+              isStatus = true;
+            }
+
+            // Return true only if BOTH conditions are true
+            return isUnit && isStatus;
+        });
+ 
+          var row = "";
+          filtered.forEach((item, index) => {
+
+                row = row + `
+                      <tr>
+                            <td scope="row">${item.businessunit}</td>
+                            <td>${item.name}</td>
+                            <td>${item.position}</td>
+                            <td class="text-center">${item.email}</td>
+                            <td class="text-center">${item.status}</td>
+                            <td class="text-center">${item.score}</td>
+                      </tr>
+                  `; 
+          });
+
+        $("#modal-body").html(`<table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Business Unit</th>
+                    <th scope="col">Name #</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Email Address</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${row}
+                </tbody>
+              </table>`);
+     }
+
+ });
+ 
+</script>

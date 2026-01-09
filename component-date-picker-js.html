@@ -1,0 +1,25 @@
+<script src="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.9.4/dist/js/tempus-dominus.min.js" crossorigin="anonymous"></script>
+
+<script>
+
+    $("div[component-type='datePicker']").each(function() {
+    var elementId = $(this).attr('id'); 
+
+    const datePickerEffectiveDateElement = document.getElementById(elementId);
+
+    new tempusDominus.TempusDominus(datePickerEffectiveDateElement, {
+      useCurrent: false,
+        // Configuration options for date-only mode
+        display: {
+            components: {
+                clock: false // Disables the time/clock component 
+            }
+        },
+        // Set the localization to a common date format (MM/DD/YYYY)
+        localization: {
+            format: 'L',
+        }
+    });
+});
+
+</script>
