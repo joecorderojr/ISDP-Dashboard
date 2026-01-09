@@ -30,7 +30,7 @@
           <td><?=unitName?></td>
           <td>
             <?
-              if(unitData["For Review"] === 0)
+              if(unitData["For Review"] === 0 || !hasAccessRoleInDocuments)
               {
             ?>
                <span><?=unitData["For Review"]?></span>
@@ -50,7 +50,7 @@
           </td>
           <td>
             <?
-              if(unitData["Overdue"] === 0)
+              if(unitData["Overdue"] === 0 || !hasAccessRoleInDocuments)
               {
             ?>
                <span><?=unitData["Overdue"]?></span>
@@ -70,7 +70,7 @@
           </td>
           <td>
             <?
-              if(unitData["Reviewed"] === 0)
+              if(unitData["Reviewed"] === 0 !hasAccessRoleInDocuments)
               {
             ?>
                <span><?=unitData["Reviewed"]?></span>
@@ -90,7 +90,7 @@
           </td>
           <td>
             <?
-              if(unitData["Total"] === 0)
+              if(unitData["Total"] === 0 !hasAccessRoleInDocuments)
               {
             ?>
                <span><?=unitData["Total"]?></span>
