@@ -159,7 +159,7 @@ function saveTrainingData(list, sheetName) {
   const ss = SpreadsheetApp.openByUrl(appSettingURL);
   const sheet = ss.getSheetByName(sheetName);
   sheet.getRange("A2:G1000").clearContent();
-
+  Logger.log("Training Data List: " + JSON.stringify(list));
   list.map(function (rowData, rowIndex) {
     sheet.getRange(rowIndex + 2, 1, 1, 7).setValues([rowData]);
   });
