@@ -137,6 +137,7 @@ function updateDataPrivacyTrainingData() {
           position: row[col["POSITION TITLE"]],
           email: row[col["EMAIL ADDRESS"]],
           status: status,
+          completionDate: row[col["COMPLETION DATE"]],
           score: score,
         });
       }
