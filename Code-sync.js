@@ -123,23 +123,15 @@ function updateDataPrivacyTrainingData() {
       }
 
       if (inactive === "ACTIVE") {
-        units[unit].employees++;
-
-        if (status === "In Progress") units[unit].inProgress++;
-        if (status === "Completed") {
-          units[unit].completed++;
-          if (score !== null) units[unit].scores.push(score);
-        }
-
-        objList.push({
-          businessunit: row[col["BUSINESS UNIT"]],
-          name: row[col["COMPLETE NAME"]],
-          position: row[col["POSITION TITLE"]],
-          email: row[col["EMAIL ADDRESS"]],
-          status: status,
-          completionDate: row[col["COMPLETION DATE"]],
-          score: score,
-        });
+        objList.push([
+          row[col["BUSINESS UNIT"]],
+          row[col["COMPLETE NAME"]],
+          row[col["POSITION TITLE"]],
+          row[col["EMAIL ADDRESS"]],
+          status,
+          row[col["COMPLETION DATE"]],
+          score,
+        ]);
       }
     });
 
