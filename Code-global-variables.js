@@ -23,6 +23,7 @@ var soc2Type2_data;
 var iso_27001_compliance_data = []; 
 var hasAccessRoleInTrainings = false;
 var hasAccessRoleInDocuments = false;
+var hasAccessRoleInSync = false;
 
 var dataPrivacyTrainings = [];
 var dataPrivacyTrainingsTotal = null;

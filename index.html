@@ -57,35 +57,38 @@
                 </li>
 
                 <!-- DROPDOWN for Settings -->
-                <li class="nav-item dropdown" role="presentation">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" id="settingsDropdown">
-                        Settings
-                    </a>
-                    
-                    <!-- The Dropdown Menu containing the actual Tab Triggers -->
-                    <ul class="dropdown-menu" aria-labelledby="settingsDropdown">
-                        <!-- Dropdown items use default dark theme colors -->
-                         <? if(hasAccessRoleInDocuments){ ?>
+                 <? if(hasAccessRoleInDocuments || hasAccessRoleInSync){ ?>
+                  <li class="nav-item dropdown" role="presentation">
+                      <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" id="settingsDropdown">
+                          Settings
+                      </a>
+                      
+                      <!-- The Dropdown Menu containing the actual Tab Triggers -->
+                      <ul class="dropdown-menu" aria-labelledby="settingsDropdown">
+                          <!-- Dropdown items use default dark theme colors -->
+                          <? if(hasAccessRoleInDocuments){ ?>
                             <li>
                                 <a class="dropdown-item" href="#settings-manage-document" data-bs-toggle="tab" role="tab" aria-controls="service-a" aria-selected="false">
                                     Manage Document Review
                                 </a>
-                            </li> 
+                            </li>
                             <li>
                                 <a class="dropdown-item" href="#settings-manage-document-user" data-bs-toggle="tab" role="tab" aria-controls="service-a" aria-selected="false">
                                     Manage Document Review User
                                 </a>
+                            </li> 
+                          <? } ?>
+    
+                          <? if(hasAccessRoleInSync){ ?>
+                            <li>
+                                <a class="dropdown-item" href="#settings-sync-manager" data-bs-toggle="tab" role="tab" aria-controls="sync-manager" aria-selected="false">
+                                    Sync Manager
+                                </a>
                             </li>
-                        <? } ?>
-
-                        <li>
-                            <a class="dropdown-item" href="#settings-sync-manager" data-bs-toggle="tab" role="tab" aria-controls="sync-manager" aria-selected="false">
-                                Sync Manager
-                            </a>
-                        </li> 
-                        
-                    </ul>
-                </li>
+                          <? } ?>
+                      </ul>
+                  </li>
+                <? } ?>
 
             </ul>
 
