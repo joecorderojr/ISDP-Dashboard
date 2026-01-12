@@ -340,6 +340,8 @@ function getDataPrivacyTrainingData() {
       units[unit] = { employees: 0, inProgress: 0, completed: 0, scores: [] };
     }
 
+    units[unit].employees++;
+
     if (status === "In Progress") units[unit].inProgress++;
     if (status === "Completed") {
       units[unit].completed++;
