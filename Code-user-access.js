@@ -16,11 +16,17 @@ function getAccessRole()
     var roleTrainings = sheet.getRange("B2:B500").getValues();
     roleTrainings = filterEmptyRows(roleTrainings).flat();
 
+    var roleSync = sheet.getRange("C2:C500").getValues();
+    roleSync = filterEmptyRows(roleSync).flat();
+
     hasAccessRoleInTrainings = roleTrainings.includes(loginUser);
     hasAccessRoleInDocuments = roleDocuments.includes(loginUser);
+    hasAccessRoleInSync = roleSync.includes(loginUser);
 
     Logger.log(roleDocuments);
     Logger.log(roleTrainings);
+    Logger.log(roleSync);
     Logger.log("hasAccessRoleInTrainings: " + hasAccessRoleInTrainings);
     Logger.log("hasAccessRoleInDocuments: " + hasAccessRoleInDocuments);
+    Logger.log("hasAccessRoleInSync: " + hasAccessRoleInSync);
 }
