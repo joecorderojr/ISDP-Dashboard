@@ -1,6 +1,8 @@
 
 function uploadAndSummarize(base64Data, fileName, targetFolderId) {
   try {
+    var period = fileName;
+    fileName = "VA Summary " + fileName;
     const blob = Utilities.newBlob(
       Utilities.base64Decode(base64Data),
       MimeType.MICROSOFT_EXCEL,
@@ -15,7 +17,7 @@ function uploadAndSummarize(base64Data, fileName, targetFolderId) {
 
     const convertedFile = Drive.Files.insert(resource, blob, { convert: true });
 
-    summarizeRisk(convertedFile.id);
+    summarizeRisk(convertedFile.id, period);
 
     return {
       fileUrl: convertedFile.alternateLink,
@@ -27,7 +29,7 @@ function uploadAndSummarize(base64Data, fileName, targetFolderId) {
   }
 }
 
-function summarizeRisk(fileId) {
+function summarizeRisk(fileId, period) {
   const inputSheet = SpreadsheetApp.openById(fileId).getSheets()[0];
   const inputData = inputSheet.getDataRange().getValues();
 
@@ -73,11 +75,12 @@ function summarizeRisk(fileId) {
   if (!outputSheet) {
     outputSheet = outputSpreadsheet.insertSheet('VA Summary');
   } else {
-    outputSheet.clearContents();
+    outputSheet.getRange("A2:E1000").clear();
   }
 
   const range = outputSheet.getRange(1, 1, output.length, output[0].length);
   range.setValues(output);
+  outputSheet.getRange("H2").setValue(period);
 
   const lastCol = output[0].length;
 

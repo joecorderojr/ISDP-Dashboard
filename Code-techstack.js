@@ -115,9 +115,10 @@ function getVASummaryData() {
     
     // Get data from row 2, columns 1 and 2
     const values = sheet.getRange("B2:E2").getValues();
-
     const data = [values[0][0], values[0][1], values[0][2], values[0][3]];
 
+    vaPeriod = "VA Summary " + sheet.getRange("H2").getValues()[0][0];
+    Logger.log(vaPeriod);
     vaSummary_data = JSON.stringify(data, null, 2);
 
   } catch (e) {

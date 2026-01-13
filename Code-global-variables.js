@@ -24,6 +24,7 @@ var iso_27001_compliance_data = [];
 var hasAccessRoleInTrainings = false;
 var hasAccessRoleInDocuments = false;
 var hasAccessRoleInSync = false;
+var vaPeriod = "";
 
 var dataPrivacyTrainings = [];
 var dataPrivacyTrainingsTotal = null;
