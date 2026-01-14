@@ -95,10 +95,15 @@ function updateCyberSecurity2024() {
   }
 }
 
-function updateDataPrivacyTrainingData() {
+function updateDataPrivacyTrainingData2025() {
+  updateDataPrivacyTrainingData("2025");
+}
+
+
+function updateDataPrivacyTrainingData(year) {
   try {
-    var ss = SpreadsheetApp.openByUrl(dataPrivacyURL);
-    var sheet = ss.getSheetByName("DP C/O LEGAL");
+    var ss = SpreadsheetApp.openByUrl(appSettingURL);
+    var sheet = ss.getSheetByName(year + " DP C/O LEGAL");
 
     var lastRow = sheet.getRange("A3").getDataRegion().getLastRow();
     var data = sheet.getRange(3, 1, lastRow, 20).getValues();
@@ -135,7 +140,7 @@ function updateDataPrivacyTrainingData() {
       }
     });
 
-    saveTrainingData(objList, "DataPrivacy");
+    saveTrainingData(objList, "DataPrivacy" + year);
 
     let response = "Success";
     Logger.log(response);

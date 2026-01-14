@@ -1,5 +1,6 @@
 const url = "https://docs.google.com/spreadsheets/d/1Sxcw_EVGR3VTfcWP-S3_NbBdYu1riZHmN88e2dM0ivA/edit?gid=638578937#gid=638578937";
-const dataPrivacyURL = "https://docs.google.com/spreadsheets/d/1_cmTfNG7Oia1n77_lOVFzZh_ezZvIZvb0Czo-ANLk0s/edit?gid=1920480011#gid=1920480011"
+const dataPrivacyURL =
+  "https://docs.google.com/spreadsheets/d/1CzfTxPZvFXgz7J0rFHxw82CR5McSCP-h5pop_YL3Rq4/edit?gid=56851791#gid=56851791";
 const cyberSecurityURL = "https://docs.google.com/spreadsheets/d/1fmfKouNUT1tLwOxIdMQoZEvks2C8DHoK6TqT7N_Alcc/edit?gid=2024740077#gid=2024740077"
 const appSettingURL = "https://docs.google.com/spreadsheets/d/1WvLg2sRLzP8xaROWkBtcfgFzyZJhawQXP_O1PxqD0ao/edit?gid=1428041287#gid=1428041287";
 

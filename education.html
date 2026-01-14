@@ -12,108 +12,130 @@
    <div class="panel-title my-5">
     <h4>Data Privacy Training</h4>
    </div>
-   <div>
+   
+   <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="pills-dataPrivacy2026-tab" data-bs-toggle="pill" data-bs-target="#pills-dataPrivacy2026" type="button" role="tab" aria-controls="pills-dataPrivacy2026" aria-selected="true">2026</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="pills-dataPrivacy2025-tab" data-bs-toggle="pill" data-bs-target="#pills-dataPrivacy2025" type="button" role="tab" aria-controls="pills-dataPrivacy2025" aria-selected="true">2025</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-dataPrivacy2024-tab" data-bs-toggle="pill" data-bs-target="#pills-dataPrivacy2024" type="button" role="tab" aria-controls="pills-dataPrivacy2024" aria-selected="false">2024</button>
+    </li> 
+  </ul>
 
-   </div>
-   <div class="dashboard-table-container">
-      <table class="dashboard-table">
-          <thead>
-              <tr>
-                  <th>Unit</th>
-                  <th># Employees</th>
-                  <th>In-progress</th>
-                  <th>Completed</th>
-                  <th>% Completed</th> 
-                  <th>% Quiz Performance</th>
-              </tr>
-          </thead>
-          <tbody>
+  <div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-dataPrivacy2026" role="tabpanel" aria-labelledby="pills-dataPrivacy2026-tab">
+    </div>
+    <div class="tab-pane fade show active" id="pills-dataPrivacy2025" role="tabpanel" aria-labelledby="pills-dataPrivacy2025-tab">
 
-            <? dataPrivacyTrainings.map((obj, index) => { 
-              
-                const isEven = index % 2 === 0;
-                const arrayLength = Array.isArray(dataPrivacyTrainings) ? dataPrivacyTrainings.length : 0;
-                const isLastRow = index === (arrayLength - 1) && arrayLength > 0;
+      <div class="dashboard-table-container">
+          <table class="dashboard-table">
+              <thead>
+                  <tr>
+                      <th>Unit</th>
+                      <th># Employees</th>
+                      <th>In-progress</th>
+                      <th>Completed</th>
+                      <th>% Completed</th> 
+                      <th>% Quiz Performance</th>
+                  </tr>
+              </thead>
+              <tbody>
 
-                // 3. Combine classes for dynamic styling
-              let rowClass = '';
-              if (isEven) {
-                rowClass += 'even-row';
-              }
-              if (isLastRow) {
-                rowClass += ' last-row';
-              } 
-              ?>
+                <? dataPrivacyTrainings.map((obj, index) => { 
+                  
+                    const isEven = index % 2 === 0;
+                    const arrayLength = Array.isArray(dataPrivacyTrainings) ? dataPrivacyTrainings.length : 0;
+                    const isLastRow = index === (arrayLength - 1) && arrayLength > 0;
 
-            <?if(!isLastRow) {?>
-            
-              <?if(obj.employeeCount !== 0) {?>
+                    // 3. Combine classes for dynamic styling
+                  let rowClass = '';
+                  if (isEven) {
+                    rowClass += 'even-row';
+                  }
+                  if (isLastRow) {
+                    rowClass += ' last-row';
+                  } 
+                  ?>
 
-              <!-- Access data using array indexing or object keys, based on what 'obj' is -->
-              <tr>
-                <td><?= obj.unit ?></td>
-                <td><?= obj.employeeCount ?></td>
-                <td>
-                  <? if(obj.inProgressCount === 0 || hasAccessRoleInTrainings === false) {?>
-                    <?=obj.inProgressCount?>
-                  <?} else {?>
-                  <button type="button" 
-                      class="btn btn-link" 
-                      data-bs-toggle="modal" 
-                      data-modal-type="data privacy" 
-                      data-modal-unit="<?=obj.unit?>" 
-                      data-modal-status="In Progress" 
-                      data-bs-target="#modalDocument">
-                      <?=obj.inProgressCount?>
-                  </button>
-                 <?}?>
-                </td>
-                <td>
-                  <? if(obj.completedCount === 0 || hasAccessRoleInTrainings === false) {?>
-                    <?=obj.completedCount?>
-                  <?} else {?>
-                  <button type="button" 
-                      class="btn btn-link" 
-                      data-bs-toggle="modal" 
-                      data-modal-type="data privacy" 
-                      data-modal-unit="<?=obj.unit?>" 
-                      data-modal-status="Completed" 
-                      data-bs-target="#modalDocument">
-                      <?=obj.completedCount?>
-                  </button>
-                 <?}?>
-                 </td>
-                <td><?= obj.pctCompleted ?></td>
-                <td><?= obj.pctAvgQuiz ?></td>
-              </tr>
+                <?if(!isLastRow) {?>
+                
+                  <?if(obj.employeeCount !== 0) {?>
 
-              <?}?>
+                  <!-- Access data using array indexing or object keys, based on what 'obj' is -->
+                  <tr>
+                    <td><?= obj.unit ?></td>
+                    <td><?= obj.employeeCount ?></td>
+                    <td>
+                      <? if(obj.inProgressCount === 0 || hasAccessRoleInTrainings === false) {?>
+                        <?=obj.inProgressCount?>
+                      <?} else {?>
+                      <button type="button" 
+                          class="btn btn-link" 
+                          data-bs-toggle="modal" 
+                          data-modal-type="data privacy" 
+                          data-modal-unit="<?=obj.unit?>" 
+                          data-modal-status="In Progress" 
+                          data-bs-target="#modalDocument">
+                          <?=obj.inProgressCount?>
+                      </button>
+                    <?}?>
+                    </td>
+                    <td>
+                      <? if(obj.completedCount === 0 || hasAccessRoleInTrainings === false) {?>
+                        <?=obj.completedCount?>
+                      <?} else {?>
+                      <button type="button" 
+                          class="btn btn-link" 
+                          data-bs-toggle="modal" 
+                          data-modal-type="data privacy" 
+                          data-modal-unit="<?=obj.unit?>" 
+                          data-modal-status="Completed" 
+                          data-bs-target="#modalDocument">
+                          <?=obj.completedCount?>
+                      </button>
+                    <?}?>
+                    </td>
+                    <td><?= obj.pctCompleted ?></td>
+                    <td><?= obj.pctAvgQuiz ?></td>
+                  </tr>
 
-            <?} else {?>
+                  <?}?>
 
-              <tfoot class="total-row">
-                <td><?= obj.unit ?></td>
-                <td><?= obj.employeeCount ?></td>
-                <td><?= obj.inProgressCount ?></td>
-                <td><?= obj.completedCount ?></td>
-                <td><?= obj.pctCompleted ?></td>
-                <td><?= obj.pctAvgQuiz ?></td>
-              </tfoot>
+                <?} else {?>
 
-            <?}?>
+                  <tfoot class="total-row">
+                    <td><?= obj.unit ?></td>
+                    <td><?= obj.employeeCount ?></td>
+                    <td><?= obj.inProgressCount ?></td>
+                    <td><?= obj.completedCount ?></td>
+                    <td><?= obj.pctCompleted ?></td>
+                    <td><?= obj.pctAvgQuiz ?></td>
+                  </tfoot>
+
+                <?}?>
 
 
-          <? }); ?> <!-- CORRECT CLOSURE -->
-             
-          </tbody>
-      </table>
-  </div> 
+              <? }); ?> <!-- CORRECT CLOSURE -->
+                
+              </tbody>
+          </table>
+      </div> 
+    </div>
+    <div class="tab-pane fade show active" id="pills-dataPrivacy2024" role="tabpanel" aria-labelledby="pills-dataPrivacy2024-tab">
+    </div>
+  </div>
 
 <div class="panel-title my-4">
   <h4>Cyber Security 101 (Winterfell)</h4>
 </div>
 
 <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="pills-cyber2026-tab" data-bs-toggle="pill" data-bs-target="#pills-cyber2026" type="button" role="tab" aria-controls="pills-cyber2026" aria-selected="true">2026</button>
+  </li>
   <li class="nav-item" role="presentation">
     <button class="nav-link active" id="pills-cyber2025-tab" data-bs-toggle="pill" data-bs-target="#pills-cyber2025" type="button" role="tab" aria-controls="pills-cyber2025" aria-selected="true">2025</button>
   </li>
@@ -123,6 +145,9 @@
  
 </ul>
 <div class="tab-content" id="pills-tabContent">
+  <div class="tab-pane fade" id="pills-cyber2026" role="tabpanel" aria-labelledby="pills-cyber2026-tab">
+     
+  </div>
   <div class="tab-pane fade show active" id="pills-cyber2025" role="tabpanel" aria-labelledby="pills-cyber2025-tab">
     <div class="dashboard-table-container">
       <table class="dashboard-table">

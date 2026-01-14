@@ -43,27 +43,32 @@
       .updateCyberSecurity2024(); // The function name in code.gs
   });
 
-  $("#btnDataPrivacy").click(function () {
-    $("#lblSyncDataPrivacy").html("synching...");
-    $("#lblSyncDataPrivacy").removeClass();
+  $("#btnDataPrivacy2025").click(function () {
+    onDataPrivacyClick("2025");
+  });
+
+  function onDataPrivacyClick(year)
+  {
+    $("#lblSyncDataPrivacy" + year).html("synching...");
+    $("#lblSyncDataPrivacy" + year).removeClass();
 
     google.script.run
       .withSuccessHandler(function (data) {
         // 'data' is the JSON object returned by updateDataPrivacyTrainingData()
         if (data && data === "Success") {
-          $("#lblSyncDataPrivacy").html("synced");
-          $("#lblSyncDataPrivacy").addClass("text-success");
+          $("#lblSyncDataPrivacy" + year).html("synced");
+          $("#lblSyncDataPrivacy" + year).addClass("text-success");
         } else {
-          $("#lblSyncDataPrivacy").html("error");
-          $("#lblSyncDataPrivacy").addClass("text-danger");
+          $("#lblSyncDataPrivacy" + year).html("error");
+          $("#lblSyncDataPrivacy" + year).addClass("text-danger");
         }
       })
       .withFailureHandler(function (error) {
-        $("#lblSyncDataPrivacy").html("error");
-        $("#lblSyncDataPrivacy").addClass("text-danger");
+        $("#lblSyncDataPrivacy" + year).html("error");
+        $("#lblSyncDataPrivacy" + year).addClass("text-danger");
       })
-      .updateDataPrivacyTrainingData(); // The function name in Code-sync.gs
-  });
+      .updateDataPrivacyTrainingData(year); // The function name in Code-sync.gs
+  }
 
   function upload() {
     $("#upload-error").hide();
