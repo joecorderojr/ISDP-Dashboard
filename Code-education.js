@@ -110,9 +110,9 @@ function pivotCountsToChartDocStatusDataPercentage(filterStatus, customColor) {
 
   // Define the exact Statuses and their properties (default colors, labels)
   const ALL_STATUS_DEFS = [
-    { label: "Reviewed", defaultColor: "#50297d" },
-    { label: "For Review", defaultColor: "#87a6ff" },
-    { label: "Overdue", defaultColor: "#ff7f0e" },
+    { label: "Reviewed", defaultColor: defaultBGColors.green },
+    { label: "For Review", defaultColor: defaultBGColors.yellow },
+    { label: "Overdue", defaultColor: defaultBGColors.red }
   ];
 
   // --- Step A: Calculate Total Count per Unit ---

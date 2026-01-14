@@ -1,12 +1,24 @@
 <div class="panel-title my-1">
-  <h4>Administrative Policy</h4>
+  <h4>Governance and Compliance</h4>
 </div>
 
-<div class="row">
-  <div class="col-4"><canvas id="ISOCS"></canvas> </div>
-  <div class="col-4"><canvas id="SOC2TYPE2"></canvas></div>
-  <div class="col-4"><canvas id="DPAMain"></canvas></div>
-  <div class="col-6"><canvas id="ISOBUS"></canvas></div>
+<div class="main-graph-container">
+  <div class="row">
+    <div class="col-6">
+      <canvas id="ISOBUS"></canvas>
+    </div>
+    <div class="col-6">
+      <canvas id="DocReviewMain"></canvas>
+    </div>
+  </div>
+  <div class="panel-title my-3">
+    <h5>Compliance Status</h5>
+  </div>
+  <div class="row">
+    <div class="col-4"><canvas id="ISOCS"></canvas> </div>
+    <div class="col-4"><canvas id="SOC2TYPE2"></canvas></div>
+    <div class="col-4"><canvas id="DPAMain"></canvas></div>
+  </div>
 </div>
 
 <?!= include("document-review-chart"); ?>
