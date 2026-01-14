@@ -29,14 +29,14 @@ function initializedDocumentVariables()
     }
 
     switch (list[12]) {
-      case "Overdue":
-          total_overdue++;
+      case "Reviewed":
+          total_reviewed++;
           break;
       case "For Review":
           total_for_review++;
           break;
-      case "Reviewed":
-          total_reviewed++;
+      case "Overdue":
+          total_overdue++;
           break;
     }
 
@@ -44,9 +44,9 @@ function initializedDocumentVariables()
  
   });
 
-  data_doc_total.push(total_overdue);
   data_doc_total.push(total_reviewed);
   data_doc_total.push(total_for_review);
+  data_doc_total.push(total_overdue);
 
   document_types = types;
   unit_list = units;
