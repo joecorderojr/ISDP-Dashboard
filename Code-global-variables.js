@@ -36,3 +36,15 @@ var cyberSecurityTrainings2024 = [];
 var cyberSecurityTrainingsList2024 = [];
 var cyberSecurityTrainingsTotal2024 = null;
 var phishingResult = null;
+
+const defaultBGColors = {
+  red: 'rgba(153, 27, 27, 0.7)',
+  yellow: 'rgba(161, 98, 7, 0.7)',
+  green: 'rgba(21, 128, 61, 0.7)'
+};
+
+const defaultBorderColors = {
+  red: 'rgba(153, 27, 27, 1)',
+  yellow: 'rgba(161, 98, 7, 1)',
+  green: 'rgba(21, 128, 61, 1)'
+};
