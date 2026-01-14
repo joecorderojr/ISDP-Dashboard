@@ -44,10 +44,10 @@
               </thead>
               <tbody>
 
-                <? dataPrivacyTrainings.map((obj, index) => { 
+                <? dataPrivacyTrainings2025.map((obj, index) => { 
                   
                     const isEven = index % 2 === 0;
-                    const arrayLength = Array.isArray(dataPrivacyTrainings) ? dataPrivacyTrainings.length : 0;
+                    const arrayLength = Array.isArray(dataPrivacyTrainings2025) ? dataPrivacyTrainings2025.length : 0;
                     const isLastRow = index === (arrayLength - 1) && arrayLength > 0;
 
                     // 3. Combine classes for dynamic styling
@@ -75,7 +75,7 @@
                       <button type="button" 
                           class="btn btn-link" 
                           data-bs-toggle="modal" 
-                          data-modal-type="data privacy" 
+                          data-modal-type="dataPrivacy2025" 
                           data-modal-unit="<?=obj.unit?>" 
                           data-modal-status="In Progress" 
                           data-bs-target="#modalDocument">
@@ -90,7 +90,7 @@
                       <button type="button" 
                           class="btn btn-link" 
                           data-bs-toggle="modal" 
-                          data-modal-type="data privacy" 
+                          data-modal-type="dataPrivacy2025" 
                           data-modal-unit="<?=obj.unit?>" 
                           data-modal-status="Completed" 
                           data-bs-target="#modalDocument">

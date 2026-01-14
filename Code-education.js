@@ -314,9 +314,16 @@ function getChartJsTopDocumentUsageMetrics() {
   return TDUdata;
 }
 
-function getDataPrivacyTrainingData() {
+function getDataPrivacyTrainingData2025() {
+  var response = getDataPrivacyTrainingData("2025");
+  dataPrivacyTrainings2025 = response.result;
+  dataPrivacyTrainingsTotal2025 = response.total;
+  dataPrivacyTrainingsList2025 = response.objList;
+}
+
+function getDataPrivacyTrainingData(year) {
   var ss = SpreadsheetApp.openByUrl(appSettingURL);
-  var sheet = ss.getSheetByName("DataPrivacy");
+  var sheet = ss.getSheetByName("DataPrivacy"+year);
 
   var dataArray = sheet.getRange("A1:G1000").getValues();
   const data = filterEmptyRows(dataArray);
@@ -416,12 +423,11 @@ function getDataPrivacyTrainingData() {
 
   result.push(total);
 
-  dataPrivacyTrainings = result;
-  dataPrivacyTrainingsTotal = total;
-  dataPrivacyTrainingsList = objList;
-
-  //Logger.log(dataPrivacyTrainings);
-  //return result;
+  return {
+    result: result,
+    total: total,
+    objList: objList
+  } 
 }
 
 function getCyberSecurityTrainingData2025() {

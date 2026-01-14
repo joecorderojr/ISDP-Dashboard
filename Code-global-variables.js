@@ -27,9 +27,9 @@ var hasAccessRoleInDocuments = false;
 var hasAccessRoleInSync = false;
 var vaPeriod = "";
 
-var dataPrivacyTrainings = [];
-var dataPrivacyTrainingsTotal = null;
-var dataPrivacyTrainingsList = [];
+var dataPrivacyTrainings2025 = [];
+var dataPrivacyTrainingsTotal2025 = null;
+var dataPrivacyTrainingsList2025   = [];
 var cyberSecurityTrainings2025 = [];
 var cyberSecurityTrainingsList2025 = [];
 var cyberSecurityTrainingsTotal2025 = null;
