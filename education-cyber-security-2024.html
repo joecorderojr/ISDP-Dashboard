@@ -1,0 +1,114 @@
+<? if (typeof cyberSecurityTrainings2024 !== 'undefined' && cyberSecurityTrainings2024.length > 1) { ?>
+<div class="dashboard-table-container">
+  <table class="dashboard-table">
+      <thead>
+          <tr>
+              <th>Unit</th>
+              <th># Employees</th>
+              <th>In-progress</th>
+              <th>Incomplete Missing</th>
+              <th>Completed</th>
+              <th>% Completed</th> 
+              <th>% Quiz Performance</th>
+          </tr>
+      </thead>
+      <tbody>
+          
+          <? cyberSecurityTrainings2024.map((obj, index) => { 
+          
+            const isEven = index % 2 === 0;
+            const arrayLength = Array.isArray(cyberSecurityTrainings2024) ? cyberSecurityTrainings2024.length : 0;
+            const isLastRow = index === (arrayLength - 1) && arrayLength > 0;
+
+            // 3. Combine classes for dynamic styling
+          let rowClass = '';
+          if (isEven) {
+            rowClass += 'even-row';
+          }
+          if (isLastRow) {
+            rowClass += ' last-row';
+          } 
+          ?>
+
+        <?if(!isLastRow) {?>
+
+        <?if(obj.employeeCount !== 0) {?>
+       
+          <!-- Access data using array indexing or object keys, based on what 'obj' is -->
+          <tr>
+            <td><?= obj.unit ?></td>
+              <td><?= obj.employeeCount ?></td>
+              <td>
+                <? if(obj.inProgressCount === 0 || hasAccessRoleInTrainings === false) {?>
+                  <?=obj.inProgressCount?>
+                <?} else {?>
+                <button type="button" 
+                    class="btn btn-link" 
+                    data-bs-toggle="modal" 
+                    data-modal-type="cybersecurity 2024" 
+                    data-modal-unit="<?=obj.unit?>" 
+                    data-modal-status="In Progress" 
+                    data-bs-target="#modalDocument">
+                    <?=obj.inProgressCount?>
+                </button>
+                <?}?>
+              </td>
+              <td>
+                <? if(obj.incompleteMissing === 0 || hasAccessRoleInTrainings === false) {?>
+                  <?= obj.incompleteMissing?>
+                <?} else {?>
+                <button type="button" 
+                    class="btn btn-link" 
+                    data-bs-toggle="modal" 
+                    data-modal-type="cybersecurity 2024" 
+                    data-modal-unit="<?=obj.unit?>" 
+                    data-modal-status="Incomplete - Missing" 
+                    data-bs-target="#modalDocument">
+                    <?= obj.incompleteMissing?>
+                </button>
+                <?}?>
+                </td>
+              <td>
+
+                <? if(obj.completedTotal === 0 || hasAccessRoleInTrainings === false) {?>
+                  <?= obj.completedTotal?>
+                <?} else {?>
+                <button type="button" 
+                    class="btn btn-link" 
+                    data-bs-toggle="modal" 
+                    data-modal-type="cybersecurity 2024" 
+                    data-modal-unit="<?=obj.unit?>" 
+                    data-modal-status="Completed" 
+                    data-bs-target="#modalDocument">
+                    <?= obj.completedTotal?>
+                </button>
+                <?}?>
+              </td>
+              <td><?= obj.pctCompleted ?></td>
+              <td><?= obj.pctAvgQuiz ?></td>
+        </tr>
+
+        <?}?>
+
+        <?} else {?>
+
+          <tfoot class="total-row">
+              <td><?= obj.unit ?></td>
+              <td><?= obj.employeeCount ?></td>
+              <td><?= obj.inProgressCount ?></td>
+              <td><?= obj.incompleteMissing?></td>
+              <td><?= obj.completedTotal ?></td>
+              <td><?= obj.pctCompleted ?></td>
+              <td><?= obj.pctAvgQuiz ?></td>
+          </tfoot>
+
+        <?}?>
+
+
+        <? }); ?>
+        </tbody>
+    </table>
+</div>
+<? } else { ?>
+  <p class="text-center mt-4">No data available for 2024.</p>
+<? } ?>
