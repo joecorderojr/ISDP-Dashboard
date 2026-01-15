@@ -9,18 +9,12 @@ const DP101data = {
         label: 'Data Privacy 101',
         data: [<?!=dataPrivacyTrainingsTotal2025.completedCount?>, <?!=dataPrivacyTrainingsTotal2025.inProgressCount?>], // Values for each category
         backgroundColor: [
-            'rgba(108,59,170, 0.7)',
-            'rgba(157,0,255, 0.7)',
-            'rgba(86,5,145, 0.7)',
-            'rgba(204,204,255, 0.7)',
-            'rgba(138,0,196, 0.7)'
+            <?!= JSON.stringify(defaultBGColors.green)?>,
+            <?!= JSON.stringify(defaultBGColors.red)?>
         ],
         borderColor: [
-            'rgba(55,37,40, 1)',
-            'rgba(55,37,40, 1)',
-            'rgba(55,37,40, 1)',
-            'rgba(55,37,40, 1)',
-            'rgba(55,37,40, 1)',
+            <?!= JSON.stringify(defaultBorderColors.green)?>,
+            <?!= JSON.stringify(defaultBorderColors.red)?>
         ],
         borderWidth: 1
     }]
@@ -85,22 +79,19 @@ const C101ET = document.getElementById('C101ET').getContext('2d');
 const C101ETMain = document.getElementById('C101ETMain').getContext('2d');
 
 const C101ETdata = {
-    labels: ['Completed', 'Incomplete-Missing', 'In-Progress'], // Categories
+    labels: ['Completed', 'In-Progress', 'Incomplete-Missing'], // Categories
     datasets: [{
         label: 'Cybersecurity 101',
-        data: [<?!= cyberSecurityTrainingsTotal2025.completedTotal ?>, <?!= cyberSecurityTrainingsTotal2025.incompleteMissing ?>, <?!= cyberSecurityTrainingsTotal2025.inProgressCount ?>], // Values for each category
+        data: [<?!= cyberSecurityTrainingsTotal2025.completedTotal ?>, <?!= cyberSecurityTrainingsTotal2025.inProgressCount ?>, <?!= cyberSecurityTrainingsTotal2025.incompleteMissing ?>], // Values for each category
         backgroundColor: [
-            'rgba(108,59,170, 0.7)',
-            'rgba(157,0,255, 0.7)',
-            'rgba(86,5,145, 0.7)',
-            'rgba(204,204,255, 0.7)',
-            'rgba(138,0,196, 0.7)'
+            <?!= JSON.stringify(defaultBGColors.green)?>,
+            <?!= JSON.stringify(defaultBGColors.yellow)?>,
+            <?!= JSON.stringify(defaultBGColors.red)?>
         ],
         borderColor: [
-            'rgba(89, 51, 146, 1)',
-            'rgba(133, 77, 220, 1)',
-            'rgba(89, 51, 146, 1)',
-            'rgba(133, 77, 220, 1)'
+            <?!= JSON.stringify(defaultBorderColors.green)?>,
+            <?!= JSON.stringify(defaultBorderColors.yellow)?>,
+            <?!= JSON.stringify(defaultBorderColors.red)?>
         ],
         borderWidth: 1
     }]
@@ -128,7 +119,7 @@ const C101ETconfig = {
           title: {
               display: true,
               text: 'Cybersecurity 101',
-              color: 'white',
+              color: 'white', 
               font: {
                 size: 20
               }
