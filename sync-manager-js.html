@@ -1,51 +1,51 @@
 <script>
-  $("#btnSyncCyber2025").click(function () {
-    $("#lblSyncCyber2025").html("synching...");
-    $("#lblSyncCyber2025").removeClass();
+  $("#btnSyncCyber2026").click(function () {
+    onCyberClick("2026");
+  });
 
-    google.script.run
-      .withSuccessHandler(function (data) {
-        // 'data' is the JSON object returned by updateCyberSecurity2025()
-        if (data && data === "Success") {
-          $("#lblSyncCyber2025").html("synced");
-          $("#lblSyncCyber2025").addClass("text-success");
-        } else {
-          $("#lblSyncCyber2025").html("error");
-          $("#lblSyncCyber2025").addClass("text-danger");
-        }
-      })
-      .withFailureHandler(function (error) {
-        $("#lblSyncCyber2025").html("error: " + error.message);
-        $("#lblSyncCyber2025").addClass("text-danger");
-      })
-      .updateCyberSecurity2025(); // The function name in code.gs
+  $("#btnSyncCyber2025").click(function () {
+    onCyberClick("2025");
   });
 
   $("#btnSyncCyber2024").click(function () {
-    $("#lblSyncCyber2024").html("synching...");
-    $("#lblSyncCyber2024").removeClass();
+    onCyberClick("2024");
+  });
 
-    google.script.run
-      .withSuccessHandler(function (data) {
-        // 'data' is the JSON object returned by updateCyberSecurity2024()
-        if (data && data === "Success") {
-          $("#lblSyncCyber2024").html("synced");
-          $("#lblSyncCyber2024").addClass("text-success");
-        } else {
-          $("#lblSyncCyber2024").html("error");
-          $("#lblSyncCyber2024").addClass("text-danger");
-        }
-      })
-      .withFailureHandler(function (error) {
-        $("#lblSyncCyber2024").html("error: " + error.message);
-        $("#lblSyncCyber2024").addClass("text-danger");
-      })
-      .updateCyberSecurity2024(); // The function name in code.gs
+  $("#btnDataPrivacy2026").click(function () {
+    onDataPrivacyClick("2026");
   });
 
   $("#btnDataPrivacy2025").click(function () {
     onDataPrivacyClick("2025");
   });
+
+  $("#btnDataPrivacy2024").click(function () {
+    onDataPrivacyClick("2024");
+  });
+
+  function onCyberClick(year){
+    $("#lblSyncCyber" + year).html("synching...");
+    $("#lblSyncCyber" + year).removeClass();
+
+    google.script.run
+      .withSuccessHandler(function (data) {
+        // 'data' is the JSON object returned by updateCyberSecurity2024()
+        if (data && data === "Success") {
+          $("#lblSyncCyber" + year).html("synced");
+          $("#lblSyncCyber" + year).addClass("text-success");
+        } else {
+          $("#lblSyncCyber" + year).html("error");
+          $("#lblSyncCyber" + year).addClass("text-danger");
+        }
+      })
+      .withFailureHandler(function (error) {
+        $("#lblSyncCyber" + year).html("error: " + error.message);
+        $("#lblSyncCyber" + year).addClass("text-danger");
+      })
+      .updateCyberSecurity(year); // The function name in code.gs
+  };
+
+  
 
   function onDataPrivacyClick(year)
   {
