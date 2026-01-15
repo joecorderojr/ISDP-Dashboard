@@ -281,14 +281,14 @@ const SOC2TYPE2data = {
         label: 'SOC2 TYPE2',
         data: <?!= JSON.stringify(soc2Type2_data.values) ?>,
         backgroundColor: [
-          'rgba(153, 27, 27, 0.7)',
-          'rgba(170, 45, 45, 0.7)',
-          'rgba(187, 65, 65, 0.7)', 
+          <?!= JSON.stringify(defaultBGColors.red)?>,
+          <?!= JSON.stringify(defaultBGColors.yellow)?>,
+          <?!= JSON.stringify(defaultBGColors.green)?>, 
         ],
         borderColor: [
-          'rgba(153, 27, 27, 1)',
-          'rgba(170, 45, 45, 1)',
-          'rgba(187, 65, 65, 1)', 
+          <?!= JSON.stringify(defaultBorderColors.red)?>,
+          <?!= JSON.stringify(defaultBorderColors.yellow)?>,
+          <?!= JSON.stringify(defaultBorderColors.green)?>, 
         ],
         borderWidth: 1
     }]
