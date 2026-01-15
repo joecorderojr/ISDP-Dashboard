@@ -15,7 +15,7 @@
         }
       })
       .withFailureHandler(function (error) {
-        $("#lblSyncCyber2025").html("error");
+        $("#lblSyncCyber2025").html("error: " + error.message);
         $("#lblSyncCyber2025").addClass("text-danger");
       })
       .updateCyberSecurity2025(); // The function name in code.gs
@@ -37,7 +37,7 @@
         }
       })
       .withFailureHandler(function (error) {
-        $("#lblSyncCyber2024").html("error");
+        $("#lblSyncCyber2024").html("error: " + error.message);
         $("#lblSyncCyber2024").addClass("text-danger");
       })
       .updateCyberSecurity2024(); // The function name in code.gs
@@ -59,12 +59,12 @@
           $("#lblSyncDataPrivacy" + year).html("synced");
           $("#lblSyncDataPrivacy" + year).addClass("text-success");
         } else {
-          $("#lblSyncDataPrivacy" + year).html("error");
+          $("#lblSyncDataPrivacy" + year).html("error: " + data);
           $("#lblSyncDataPrivacy" + year).addClass("text-danger");
         }
       })
       .withFailureHandler(function (error) {
-        $("#lblSyncDataPrivacy" + year).html("error");
+        $("#lblSyncDataPrivacy" + year).html("error: " + error.message);
         $("#lblSyncDataPrivacy" + year).addClass("text-danger");
       })
       .updateDataPrivacyTrainingData(year); // The function name in Code-sync.gs

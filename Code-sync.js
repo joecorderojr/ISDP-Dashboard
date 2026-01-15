@@ -1,6 +1,6 @@
 function updateCyberSecurity2025() {
   try {
-    var ss = SpreadsheetApp.openByUrl(cyberSecurityURL);
+    var ss = SpreadsheetApp.openByUrl(hrURL);
     var sheet = ss.getSheetByName("CYB101");
     var dataArray = sheet.getRange("A3:Z600").getValues();
     const data = filterEmptyRows(dataArray);
@@ -48,7 +48,7 @@ function updateCyberSecurity2025() {
 
 function updateCyberSecurity2024() {
   try {
-    var ss = SpreadsheetApp.openByUrl(cyberSecurityURL);
+    var ss = SpreadsheetApp.openByUrl(hrURL);
     var sheet = ss.getSheetByName("CYB101 2024");
     var dataArray = sheet.getRange("A3:Z600").getValues();
     const data = filterEmptyRows(dataArray);
@@ -102,8 +102,13 @@ function updateDataPrivacyTrainingData2025() {
 
 function updateDataPrivacyTrainingData(year) {
   try {
-    var ss = SpreadsheetApp.openByUrl(appSettingURL);
-    var sheet = ss.getSheetByName(year + " DP C/O LEGAL");
+    var ss = SpreadsheetApp.openByUrl(hrURL);
+    var sheetName = year + " DP C/O LEGAL";
+    var sheet = ss.getSheetByName(sheetName);
+
+    if (!sheet) {
+      throw new Error(`Sheet with name '${sheetName}' not found.`);
+    }
 
     var lastRow = sheet.getRange("A3").getDataRegion().getLastRow();
     var data = sheet.getRange(3, 1, lastRow, 20).getValues();
