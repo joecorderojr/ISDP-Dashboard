@@ -79,19 +79,19 @@ const C101ET = document.getElementById('C101ET').getContext('2d');
 const C101ETMain = document.getElementById('C101ETMain').getContext('2d');
 
 const C101ETdata = {
-    labels: ['Completed', 'Incomplete-Missing', 'In-Progress'], // Categories
+    labels: ['Completed', 'In-Progress', 'Incomplete-Missing'], // Categories
     datasets: [{
         label: 'Cybersecurity 101',
-        data: [<?!= cyberSecurityTrainingsTotal2025.completedTotal ?>, <?!= cyberSecurityTrainingsTotal2025.incompleteMissing ?>, <?!= cyberSecurityTrainingsTotal2025.inProgressCount ?>], // Values for each category
+        data: [<?!= cyberSecurityTrainingsTotal2025.completedTotal ?>, <?!= cyberSecurityTrainingsTotal2025.inProgressCount ?>, <?!= cyberSecurityTrainingsTotal2025.incompleteMissing ?>], // Values for each category
         backgroundColor: [
             <?!= JSON.stringify(defaultBGColors.green)?>,
-            <?!= JSON.stringify(defaultBGColors.red)?>,
-            <?!= JSON.stringify(defaultBGColors.yellow)?>
+            <?!= JSON.stringify(defaultBGColors.yellow)?>,
+            <?!= JSON.stringify(defaultBGColors.red)?>
         ],
         borderColor: [
             <?!= JSON.stringify(defaultBorderColors.green)?>,
-            <?!= JSON.stringify(defaultBorderColors.red)?>,
-            <?!= JSON.stringify(defaultBorderColors.yellow)?>
+            <?!= JSON.stringify(defaultBorderColors.yellow)?>,
+            <?!= JSON.stringify(defaultBorderColors.red)?>
         ],
         borderWidth: 1
     }]
@@ -119,7 +119,7 @@ const C101ETconfig = {
           title: {
               display: true,
               text: 'Cybersecurity 101',
-              color: 'white',
+              color: 'white', 
               font: {
                 size: 20
               }
