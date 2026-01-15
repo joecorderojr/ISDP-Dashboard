@@ -45,7 +45,7 @@ function getISO27001Data() {
       if (!summary[unit]) {
         summary[unit] = {
           forReview: 0,
-          overdue: 0,
+          outdated: 0,
           revised: 0
         };
       }
@@ -54,8 +54,8 @@ function getISO27001Data() {
         case "For Review":
           summary[unit].forReview++;
           break;
-        case "Overdue":
-          summary[unit].overdue++;
+        case "Outdated":
+          summary[unit].outdated++;
           break;
         case "Revised":
           summary[unit].revised++;
@@ -64,12 +64,12 @@ function getISO27001Data() {
     });
     const units = Object.keys(summary);
     const forReview = units.map(u => summary[u].forReview || 0);
-    const overdue = units.map(u => summary[u].overdue || 0);
+    const outdated = units.map(u => summary[u].outdated || 0);
     const revised = units.map(u => summary[u].revised || 0);
     iso_27001_data = {
       labels: units,
       forReview,
-      overdue,
+      outdated,
       revised
     };
   } catch (e) {
@@ -117,7 +117,7 @@ function getDashboardData() {
 
   const col = {};
   let totalReview = 0;
-  let totalOverdue = 0;
+  let totalOutdated = 0;
   let totalReviewed = 0;
 
   data.forEach(row => {
@@ -125,32 +125,32 @@ function getDashboardData() {
     const status = row[statusCol - 1];
 
     if (!col[unit]) {
-      col[unit] = { "For Review": 0, "Overdue": 0, "Reviewed": 0 };
+      col[unit] = { "For Review": 0, "Outdated": 0, "Reviewed": 0 };
     }
 
     col[unit][status]++;
     if (status === "For Review") totalReview++;
-    if (status === "Overdue") totalOverdue++;
+    if (status === "Outdated") totalOutdated++;
     if (status === "Reviewed") totalReviewed++;
   });
 
   const tableRows = [];
-  let grandTotal = totalReview + totalOverdue + totalReviewed;
+  let grandTotal = totalReview + totalOutdated + totalReviewed;
 
   for (const unit in col) {
     const forReview = col[unit]["For Review"];
-    const overdue = col[unit]["Overdue"];
+    const outdated = col[unit]["Outdated"];
     const reviewed = col[unit]["Reviewed"];
-    const total = forReview + overdue + reviewed;
+    const total = forReview + outdated + reviewed;
 
     tableRows.push({
       unit,
       forReview,
-      overdue,
+      outdated,
       reviewed,
       total,
       pctforReview: total ? forReview / total : 0,
-      pctOverdue: total ? overdue / total : 0,
+      pctOutdated: total ? outdated / total : 0,
       pctReviewed: total ? reviewed / total : 0
     });
   }
@@ -159,11 +159,11 @@ function getDashboardData() {
   tableRows.push({
     unit: "Total",
     forReview: totalReview,
-    overdue: totalOverdue,
+    outdated: totalOutdated,
     reviewed: totalReviewed,
     total: grandTotal,
     pctforReview: grandTotal ? totalReview / grandTotal : 0,
-    pctOverdue: grandTotal ? totalOverdue / grandTotal : 0,
+    pctOutdated: grandTotal ? totalOutdated / grandTotal : 0,
     pctReviewed: grandTotal ? totalReviewed / grandTotal : 0
   });
 

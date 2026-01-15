@@ -4,7 +4,7 @@ function groupAndCountDocStatusData() {
   const employeeDocuments = document_statuses;
 
   // Define all possible status types to ensure they appear in the output with 0 count if missing
-  const allStatuses = ["Reviewed", "For Review", "Overdue"];
+  const allStatuses = ["Reviewed", "For Review", "Outdated"];
 
   const unitStatusCounts = employeeDocuments.reduce(
     (accumulator, currentItem) => {
@@ -58,7 +58,7 @@ function pivotCountsToChartDocStatusData() {
   const statusDefinitions = [
     { label: "Reviewed", color: "#50297d" },
     { label: "For Review", color: "#87a6ff" },
-    { label: "Overdue", color: "#ff7f0e" },
+    { label: "Outdated", color: "#ff7f0e" },
   ];
 
   // --- Step A: Extract Labels (Units) ---
@@ -67,7 +67,7 @@ function pivotCountsToChartDocStatusData() {
 
   // --- Step B: Build Datasets ---
   const datasets = statusDefinitions.map((statusDef) => {
-    // For each status (Reviewed, For Review, Overdue), create one dataset object
+    // For each status (Reviewed, For Review, Outdated), create one dataset object
 
     // 1. Initialize an empty array for the count data points
     const dataPoints = [];
@@ -112,7 +112,7 @@ function pivotCountsToChartDocStatusDataPercentage(filterStatus, customColor) {
   const ALL_STATUS_DEFS = [
     { label: "Reviewed", defaultColor: defaultBGColors.green },
     { label: "For Review", defaultColor: defaultBGColors.yellow },
-    { label: "Overdue", defaultColor: defaultBGColors.red }
+    { label: "Outdated", defaultColor: defaultBGColors.red }
   ];
 
   // --- Step A: Calculate Total Count per Unit ---
@@ -124,7 +124,7 @@ function pivotCountsToChartDocStatusDataPercentage(filterStatus, customColor) {
       unitTotals[unit] =
         (counts.Reviewed || 0) +
         (counts["For Review"] || 0) +
-        (counts.Overdue || 0);
+        (counts.Outdated || 0);
     }
   }
 
@@ -198,7 +198,7 @@ function calculateTotalsAndPercentages() {
   const groupedCounts = document_matrix_raw;
 
   // Define the statuses that should be included in the total calculation
-  const statuses = ["Reviewed", "For Review", "Overdue"];
+  const statuses = ["Reviewed", "For Review", "Outdated"];
 
   // Use Object.keys() to loop through each unit (HR, Admin, etc.)
   Object.keys(groupedCounts).forEach((unitKey) => {

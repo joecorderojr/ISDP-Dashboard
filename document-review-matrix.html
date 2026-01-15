@@ -6,88 +6,77 @@
   <table class="dashboard-table">
       <thead>
           <tr>
-              <th>Unit</th>
-              <th>For Review</th>
-              <th>Overdue</th>
-              <th>Reviewed</th>
-              <th>Total</th>
-              <th>% For Review</th>
-              <th>% Overdue</th>
-              <th>% Reviewed</th>
+            <th class="has-text-left">Unit</th>
+            <th class="has-text-centered">Reviewed</th>
+            <th class="has-text-centered">For Review</th>
+            <th class="has-text-centered">Outdated</th>
+            <th class="has-text-centered">Total</th>
+            <th class="has-text-centered">% Reviewed</th>
+            <th class="has-text-centered">% For Review</th>
+            <th class="has-text-centered">% Outdated</th>
           </tr>
-      </thead> 
-      <tbody>
+        </thead>
+        <tbody>
 
       <? 
-      let forReview = 0;
-      let overdue = 0;
       let reviewed = 0;
+      let forReview = 0;
+      let outdated = 0;
+      let total = 0;
+      let reviewedPercent = 0;
       
       document_matrix.map(([unitName, unitData]) => { 
         if(unitName) {?>
       
         <tr>
-          <td><?=unitName?></td>
-          <td>
-            <?
-              if(unitData["For Review"] === 0 || !hasAccessRoleInDocuments)
-              {
-            ?>
-               <span><?=unitData["For Review"]?></span>
-            <? }
-            else {
-            ?>
-            <button type="button" class="btn btn-link" data-bs-toggle="modal" 
+            <td><?=unitName?></td>
+            <td class="has-text-centered">
+              <?if(unitData["Reviewed"] === 0 || !hasAccessRoleInDocuments) {?>
+                <span><?=unitData["Reviewed"]?></span>
+              <?} else {?>
+                <button type="button" 
+                    class="btn btn-link"
+                    data-bs-toggle="modal"
                     data-modal-type="document" 
                     data-modal-unit="<?=unitName?>" 
-                    data-modal-status="For Review" 
+                    data-modal-status="Reviewed"
                     data-bs-target="#modalDocument">
-              <?=unitData["For Review"]?>
-            </button>
-
-            <?}?>
-            
-          </td>
-          <td>
-            <?
-              if(unitData["Overdue"] === 0 || !hasAccessRoleInDocuments)
-              {
-            ?>
-               <span><?=unitData["Overdue"]?></span>
-            <? }
-            else {
-            ?>
-            <button type="button" class="btn btn-link" 
-                    data-bs-toggle="modal" 
+                  <?=unitData["Reviewed"]?>
+                  </button>
+              <?}?>
+            </td>
+            <td class="has-text-centered">
+              <?if(unitData["For Review"] === 0 || !hasAccessRoleInDocuments) {?>
+                <span><?=unitData["For Review"]?></span>
+              <?} else {?>
+                <button type="button" 
+                    class="btn btn-link"
+                    data-bs-toggle="modal"
                     data-modal-type="document" 
                     data-modal-unit="<?=unitName?>" 
-                    data-modal-status="Overdue" 
+                    data-modal-status="For Review"
                     data-bs-target="#modalDocument">
-              <?=unitData["Overdue"]?>
-            </button>
-
-            <?}?>
-          </td>
-          <td>
-            <?
-              if(unitData["Reviewed"] === 0 || !hasAccessRoleInDocuments)
-              {
-            ?>
-               <span><?=unitData["Reviewed"]?></span>
-            <? }
-            else {
-            ?>
-            <button type="button" class="btn btn-link" 
-                    data-bs-toggle="modal" 
+                  <?=unitData["For Review"]?>
+                  </button>
+                
+              <?}?>
+            </td>
+            <td class="has-text-centered">
+              <?if(unitData["Outdated"] === 0 || !hasAccessRoleInDocuments) {?>
+                <span><?=unitData["Outdated"]?></span>
+              <?} else {?>
+                <button type="button" 
+                    class="btn btn-link"
+                    data-bs-toggle="modal"
                     data-modal-type="document" 
                     data-modal-unit="<?=unitName?>" 
-                    data-modal-status="Reviewed" 
+                    data-modal-status="Outdated"
                     data-bs-target="#modalDocument">
-              <?=unitData["Reviewed"]?>
-            </button>
+                  <?=unitData["Outdated"]?>
+                  </button>
 
-            <?}?>
-          </td>
+              <?}?>
+            </td>
           <td>
             <?
               if(unitData["Total"] === 0 || !hasAccessRoleInDocuments)
@@ -108,34 +97,35 @@
 
             <?}?>
           </td>
+          <td><?=unitData["ReviewedPercentage"]?>%</td>
           <td><?=unitData["For ReviewPercentage"]?>%</td>
-          <td><?=unitData.OverduePercentage?>%</td>
-          <td><?=unitData.ReviewedPercentage?>%</td>
-         
-        </tr>
-      <? 
+          <td><?=unitData["OutdatedPercentage"]?>%</td>
+
+          </tr>
+          <? 
+         reviewed = reviewed + unitData["Reviewed"];
          forReview = forReview + unitData["For Review"];
-         overdue = overdue + unitData.Overdue;
-         reviewed = reviewed + unitData.Reviewed;
-      }}); 
-      
-      let total = forReview + overdue + reviewed;
+         outdated = outdated + unitData["Outdated"];
+        }
+      });
+
+      total = forReview + outdated + reviewed;
       let forReviewPercent = Math.floor((forReview / total) * 100);
-      let overduePercent =  Math.floor((overdue / total) * 100);
-      let reviewedPercent = 100 - forReviewPercent - overduePercent;
-      
+      let outdatedPercent =  Math.floor((outdated / total) * 100);
+      reviewedPercent = 100 - forReviewPercent - outdatedPercent;
       ?>
-           
-          <tfoot class="total-row">
-              <td>Total</td>
-              <td class="number-cell"><?=forReview?></td>
-              <td class="number-cell"><?=overdue?></td>
-              <td class="number-cell"><?=reviewed?></td>
-              <td class="number-cell"><?=total?></td>
-              <td class="percentage-cell"><?=forReviewPercent?>%</td>
-              <td class="percentage-cell"><?=overduePercent?>%</td>
-              <td class="percentage-cell"><?=reviewedPercent?>%</td>
-          </tfoot>
-      </tbody>  
-  </table>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th class="has-text-left">Total</th>
+            <th class="has-text-centered"><?=reviewed?></th>
+            <th class="has-text-centered"><?=forReview?></th>
+            <th class="has-text-centered"><?=outdated?></th>
+            <th class="has-text-centered"><?=total?></th>
+            <th class="has-text-centered"><?=reviewedPercent?>%</th>
+            <th class="has-text-centered"><?=forReviewPercent?>%</th>
+            <th class="has-text-centered"><?=outdatedPercent?>%</th>
+          </tr>
+        </tfoot>
+      </table>
 </div>

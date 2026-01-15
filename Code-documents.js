@@ -16,7 +16,7 @@ function initializedDocumentVariables()
   var status = [];
   let total_reviewed = 0;
   let total_for_review = 0;
-  let total_overdue = 0;
+  let total_outdated = 0;
   document_list.forEach(function(list, index) {
     if(!types.includes(list[3]))
     {
@@ -35,8 +35,8 @@ function initializedDocumentVariables()
       case "For Review":
           total_for_review++;
           break;
-      case "Overdue":
-          total_overdue++;
+      case "Outdated":
+          total_outdated++;
           break;
     }
 
@@ -46,7 +46,7 @@ function initializedDocumentVariables()
 
   data_doc_total.push(total_reviewed);
   data_doc_total.push(total_for_review);
-  data_doc_total.push(total_overdue);
+  data_doc_total.push(total_outdated);
 
   document_types = types;
   unit_list = units;

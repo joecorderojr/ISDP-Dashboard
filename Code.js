@@ -27,25 +27,48 @@ function doGet() {
 }
 
 function include(filename) {
-  // 1. Create a template object from the file
-  const template = HtmlService.createTemplateFromFile(filename);
-  
-  // 2. Evaluate the template (process scriptlets) and get the content
-  return template.evaluate().getContent();
-  //return HtmlService.createHtmlOutputFromFile(filename).getContent();
+  try {
+    // 1. Create a template object from the file
+    const template = HtmlService.createTemplateFromFile(filename);
+    
+    // 2. Evaluate the template (process scriptlets) and get the content
+    return template.evaluate().getContent();
+  } catch (e) {
+    Logger.log(`Error including file: ${filename}. Details: ${e.stack}`);
+    return `<div style="border: 2px solid red; padding: 10px; background-color: #381e1eff;">
+              <strong>Error including ${filename}:</strong>
+              <pre>${e.stack}</pre>
+            </div>`;
+  }
 }
 
 function include_picker(filename,datePickerId) {
-  const template = HtmlService.createTemplateFromFile(filename);
-  template.datePickerId = datePickerId;
-  template.rowId = "picker_" + datePickerId;
-  return template.evaluate().getContent();
+  try {
+    const template = HtmlService.createTemplateFromFile(filename);
+    template.datePickerId = datePickerId;
+    template.rowId = "picker_" + datePickerId;
+    return template.evaluate().getContent();
+  } catch (e) {
+    Logger.log(`Error including file: ${filename}. Details: ${e.stack}`);
+    return `<div style="border: 2px solid red; padding: 10px; background-color: #381e1eff;">
+              <strong>Error including ${filename}:</strong>
+              <pre>${e.stack}</pre>
+            </div>`;
+  }
 }
 
 function include_object(filename, obj) {
-  const template = HtmlService.createTemplateFromFile(filename);
-  template.obj = obj;
-  return template.evaluate().getContent();
+  try {
+    const template = HtmlService.createTemplateFromFile(filename);
+    template.obj = obj;
+    return template.evaluate().getContent();
+  } catch (e) {
+    Logger.log(`Error including file: ${filename}. Details: ${e.stack}`);
+    return `<div style="border: 2px solid red; padding: 10px; background-color: #381e1eff;">
+              <strong>Error including ${filename}:</strong>
+              <pre>${e.stack}</pre>
+            </div>`;
+  }
 }
 
 function formatDateTimeJS(dateObj) {

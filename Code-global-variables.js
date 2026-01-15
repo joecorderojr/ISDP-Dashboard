@@ -13,7 +13,7 @@ var document_statuses = [];
 var document_matrix_raw = [];
 var document_matrix = [];
 var document_matrix_forReview = [];
-var document_matrix_overdue = [];
+var document_matrix_outdated = [];
 var document_matrix_reviewed = [];
 var tools_data;
 var tools_matrix = [];

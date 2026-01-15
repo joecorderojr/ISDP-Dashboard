@@ -25,7 +25,17 @@ const ISOCSconfig = {
     data: ISOCSdata,
     options: {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
+            datalabels: {
+                color: 'white',
+                formatter: (value, context) => {
+                    if (value === 0) {
+                        return null;
+                    }
+                    return value;
+                }
+            },
             legend: {
                 display: true,
                 position: 'top',
@@ -105,8 +115,8 @@ const ISO270001Data = {
       borderWidth: 1
     },
     {
-      label: "Overdue",
-      data: <?!= JSON.stringify(iso_27001_data.overdue) ?>,
+      label: "Outdated",
+      data: <?!= JSON.stringify(iso_27001_data.outdated) ?>,
       backgroundColor: <?!= JSON.stringify(defaultBGColors.red)?>,
       borderColor: <?!= JSON.stringify(defaultBorderColors.red)?>,
       borderWidth: 1
@@ -120,6 +130,17 @@ const ISOBUSconfig = {
     options: {
         responsive: true,
         plugins: {
+            datalabels: {
+              color: 'white',
+              anchor: 'center',
+              align: 'center',
+              formatter: (value, context) => {
+                if (value === 0) {
+                  return null;
+                }
+                return value;
+              }
+            },
             legend: {
                 display: true, // Show legend
                 position: 'top', // Legend position
@@ -301,6 +322,15 @@ const SOC2TYPE2config = {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
+            datalabels: {
+                color: 'white',
+                formatter: (value, context) => {
+                    if (value === 0) {
+                        return null;
+                    }
+                    return value + '%';
+                }
+            },
             legend: {
                 display: true,
                 position: 'top',
@@ -427,7 +457,17 @@ const DPAMainconfig = {
     data: DPAMainData,
     options: {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
+            datalabels: {
+                color: 'white',
+                formatter: (value, context) => {
+                    if (value === 0) {
+                        return null;
+                    }
+                    return value;
+                }
+            },
             legend: {
                 display: true,
                 position: 'top',

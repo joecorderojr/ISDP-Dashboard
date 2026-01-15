@@ -44,7 +44,7 @@ const customTooltipDonutMain = {
 const DS = document.getElementById("DS").getContext("2d");
 
 const DSdata = {
-  labels: ["Reviewed", "For Review", "Overdue"],
+  labels: ["Reviewed", "For Review", "Outdated"],
   datasets: [
     {
       data: <?!=JSON.stringify(data_doc_total)?>,
@@ -70,14 +70,14 @@ const DSconfig = {
   data: DSdata,
   options: {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       datalabels: {
         color: "white",
-        font: {
-          weight: "bold",
-          size: 16,
-        },
         formatter: (value, context) => {
+          if (value === 0) {
+            return null;
+          }
           const total = context.chart.data.datasets[0].data.reduce(
             (a, b) => a + b,
             0
@@ -125,10 +125,6 @@ const TDUconfig = {
     plugins: {
       datalabels: {
         color: "white",
-        font: {
-          weight: "bold",
-          size: 16,
-        },
         formatter: (value, context) => {
           const total = context.chart.data.datasets[0].data.reduce(
             (a, b) => a + b,
@@ -340,7 +336,7 @@ const FRCconfig = {
 const FRCbar = new Chart(FRC, FRCconfig);
 
 const OC = document.getElementById("OC").getContext("2d");
-const OCdata = <?!=JSON.stringify(pivotCountsToChartDocStatusDataPercentage("Overdue"));?>;
+const OCdata = <?!=JSON.stringify(pivotCountsToChartDocStatusDataPercentage("Outdated"));?>;
 
 const OCconfig = {
     type: "bar",
@@ -366,7 +362,7 @@ const OCconfig = {
         legend: { display: false },
         title: {
           display: true,
-          text: "Overdue",
+          text: "Outdated",
           color: "white",
           font: {
               size: 16
