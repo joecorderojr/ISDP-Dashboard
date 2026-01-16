@@ -22,13 +22,50 @@
     <div class="panel-title my-1">
       <h4>Education and Awareness</h4>
     </div>
-    <div id="box-education" class="main-graph-container">
-      <div class="row">
-        <div class="col-4 offset-2"><canvas id="DP101Main"></canvas></div>
-        <div class="col-4 "><canvas id="C101ETMain"></canvas></div>
+
+    <div class="row">
+      <div class="col-6 row justify-content-center">
+        <div class="col-8 dropdown mb-2">
+          <button class="btn btn-link dropdown-toggle chart-title-dropdown no-caret year-dropdown" data-type="dp"
+            id="dpYearDropdown"
+            data-bs-toggle="dropdown">
+            Data Privacy 101 – 2025
+          </button>
+
+          <ul class="dropdown-menu dropdown-menu-transparent custom-dropdown year-menu" data-type="dp" id="dpYearMenu">
+            <li><a class="dropdown-item" href="#">2026</a></li>
+            <li><a class="dropdown-item" href="#">2024</a></li>
+          </ul>
+        </div>
       </div>
-      <div><canvas id="PRMain"></canvas></div>
-      <div><canvas id="OTPMain"></canvas></div>
+      <div class="col-6 row justify-content-center">
+        <div class="col-8 dropdown mb-2 chart-dropdown">
+          <button class="btn btn-link dropdown-toggle chart-title-dropdown no-caret year-dropdown" data-type="cs"
+            id="csYearDropdown"
+            data-bs-toggle="dropdown">
+            Cybersecurity 101 – 2025
+          </button>
+
+          <ul class="dropdown-menu dropdown-menu-transparent custom-dropdown year-menu" data-type="cs" id="csYearMenu">
+            <li><a class="dropdown-item" href="#">2026</a></li>
+            <li><a class="dropdown-item" href="#">2024</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="main-graph-container" id="box-education">
+      <div class="row">
+        <div class="col-6 row justify-content-center">
+          <div class="col-8 offset-4"><canvas id="DP101Main"></canvas></div>
+        </div>
+        <div class="col-6 row justify-content-center">
+          <div class="col-8 offset-4"><canvas id="C101ETMain"></canvas></div> 
+        </div>
+      </div>
+      <div>
+        <div><canvas id="PRMain"></canvas></div>
+        <div><canvas id="OTPMain"></canvas></div>
+      </div>
     </div>
   </div>
   <!-- Teckstack -->

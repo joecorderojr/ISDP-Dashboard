@@ -3,8 +3,36 @@
    </div>
    <div class="mt-6 mb-6">
       <div class="row">
-        <div class="col-3"><canvas id="DP101"></canvas></div>
-        <div class="col-3"><canvas id="C101ET"></canvas></div>
+        <div class="col-3">
+          <div class="dropdown mb-2 d-flex justify-content-center">
+            <button class="btn btn-link dropdown-toggle chart-title-dropdown education-dropdown-title no-caret year-dropdown" data-type="dp"
+              id="dpYearDropdownMain"
+              data-bs-toggle="dropdown">
+              Data Privacy 101 – 2025
+            </button>
+
+            <ul class="dropdown-menu dropdown-menu-transparent custom-dropdown year-menu" data-type="dp" id="dpYearMenuMain">
+              <li><a class="dropdown-item education-dropdown-title" href="#">2026</a></li>
+              <li><a class="dropdown-item education-dropdown-title" href="#">2024</a></li>
+            </ul>
+          </div>
+          <canvas id="DP101"></canvas>
+        </div>
+        <div class="col-3">
+          <div class="dropdown mb-2 d-flex justify-content-center">
+            <button class="btn btn-link dropdown-toggle chart-title-dropdown education-dropdown-title no-caret year-dropdown" data-type="cs"
+              id="csYearDropdownMain"
+              data-bs-toggle="dropdown">
+              Cybersecurity 101 – 2025
+            </button>
+
+            <ul class="dropdown-menu dropdown-menu-transparent custom-dropdown year-menu" data-type="cs" id="csYearMenuMain">
+              <li><a class="dropdown-item education-dropdown-title" href="#">2026</a></li>
+              <li><a class="dropdown-item education-dropdown-title" href="#">2024</a></li>
+            </ul>
+          </div>
+          <canvas id="C101ET"></canvas>
+        </div>
         <div class="col-6"><canvas id="PR"></canvas></div>
       </div>
    </div>
