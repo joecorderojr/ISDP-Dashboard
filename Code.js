@@ -10,6 +10,7 @@ function doGet() {
   initializedDocumentVariables(); 
   getDataPrivacyTrainingData2025();
   getCyberSecurityTrainingData2025();
+  getCyberSecurityTrainingData2026();
   getCyberSecurityTrainingData2024();
   getPhishingResult();
   getISO27001Data();

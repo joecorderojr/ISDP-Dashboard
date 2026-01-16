@@ -314,6 +314,13 @@ function getChartJsTopDocumentUsageMetrics() {
   return TDUdata;
 }
 
+function getDataPrivacyTrainingData2026() {
+  var response = getDataPrivacyTrainingData("2026");
+  dataPrivacyTrainings2026 = response.result;
+  dataPrivacyTrainingsTotal2026 = response.total;
+  dataPrivacyTrainingsList2026 = response.objList;
+}
+
 function getDataPrivacyTrainingData2025() {
   var response = getDataPrivacyTrainingData("2025");
   dataPrivacyTrainings2025 = response.result;
@@ -353,6 +360,9 @@ function getDataPrivacyTrainingData(year) {
     if (status === "Completed") {
       units[unit].completed++;
       if (score !== null) units[unit].scores.push(score);
+    }
+    else {
+      units[unit].inProgress++;
     }
 
     objList.push({
@@ -430,6 +440,14 @@ function getDataPrivacyTrainingData(year) {
   } 
 }
 
+function getCyberSecurityTrainingData2026() {
+  var reponse = getCyberSecurityTrainingData(2026);
+
+  cyberSecurityTrainings2026 = reponse.result;
+  cyberSecurityTrainingsTotal2026 = reponse.total;
+  cyberSecurityTrainingsList2026 = reponse.objList;
+}
+
 function getCyberSecurityTrainingData2025() {
   var reponse = getCyberSecurityTrainingData(2025);
 
@@ -487,6 +505,9 @@ function getCyberSecurityTrainingData(year) {
     if (status === "Completed") {
       units[unit].completed++;
       if (score !== null) units[unit].scores.push(score);
+    }
+    else {
+      units[unit].inProgress++;
     }
 
     objList.push({
