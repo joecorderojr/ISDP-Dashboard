@@ -328,6 +328,14 @@ function getDataPrivacyTrainingData2025() {
   dataPrivacyTrainingsList2025 = response.objList;
 }
 
+function getDataPrivacyTrainingData2024() {
+  var response = getDataPrivacyTrainingData("2024");
+  dataPrivacyTrainings2024 = response.result;
+  dataPrivacyTrainingsTotal2024 = response.total;
+  dataPrivacyTrainingsList2024 = response.objList;
+}
+
+
 function getDataPrivacyTrainingData(year) {
   var ss = SpreadsheetApp.openByUrl(appSettingURL);
   var sheet = ss.getSheetByName("DataPrivacy"+year);
