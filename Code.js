@@ -8,6 +8,7 @@ function doGet() {
   tmp.list = document_list;
 
   initializedDocumentVariables(); 
+  getDataPrivacyTrainingData2026();
   getDataPrivacyTrainingData2025();
   getDataPrivacyTrainingData2026();
   getCyberSecurityTrainingData2025();

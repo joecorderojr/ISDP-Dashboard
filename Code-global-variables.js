@@ -46,6 +46,8 @@ var cyberSecurityTrainingsList2024 = [];
 var cyberSecurityTrainingsTotal2024 = null;
 var phishingResult = null;
 
+const inProgressStatuses = ["Scheduled", "In Progress", "Not Started"];
+
 const defaultBGColors = {
   red: 'rgba(153, 27, 27, 0.7)',
   yellow: 'rgba(161, 98, 7, 0.7)',

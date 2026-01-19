@@ -70,8 +70,8 @@
      else if(type === "dataPrivacy2026")
      {
         const filtered = dataPrivacyTrainings2026.filter(item => {
-            const isStatus = status === "All" || item.status === status;
-            const isUnit = item.unit === unitName;
+            const isStatus = item.status === status;
+            const isUnit = item.businessunit === unitName;
             
             return isUnit && isStatus;
         });
@@ -80,6 +80,7 @@
           filtered.forEach((item, index) => {
                 row = row + `
                       <tr>
+                            <td scope="row">${item.businessunit}</td>
                             <td scope="row">${item.name}</td>
                             <td>${item.position}</td>
                             <td class="text-center">${item.email}</td>
@@ -92,6 +93,7 @@
         $("#modal-body").html(`<table class="table">
                 <thead>
                   <tr>
+                    <th scope="col">Business Unit</th>
                     <th scope="col">Name</th>
                     <th scope="col">Position</th>
                     <th scope="col">Email</th>
@@ -120,12 +122,12 @@
 
                 row = row + `
                       <tr>
-                            <td scope="row">${item.ee}</td>
-                            <td>${item.name}</td>
+                            <td scope="row">${item.businessunit}</td>
+                            <td scope="row">${item.name}</td>
                             <td>${item.position}</td>
-                            <td class="text-center">${item.businessunit}</td>
-                            <td class="text-center">${item.subunit}</td>
                             <td class="text-center">${item.email}</td>
+                            <td class="text-center">${item.status}</td>
+                            <td class="text-center">${item.score}</td>
                       </tr>
                   `; 
           });
@@ -133,12 +135,12 @@
         $("#modal-body").html(`<table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">EE Code</th>
-                    <th scope="col">Name #</th>
-                    <th scope="col">Position</th>
                     <th scope="col">Business Unit</th>
-                    <th scope="col">Sub-Unit</th>
-                    <th scope="col">Email Address</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Score</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -149,7 +151,7 @@
      else if (type === "cybersecurity 2026")
      {
         const filtered = cyberSecurityTrainingsList2026.filter(item => {
-            var isStatus = item.status === status || item.status === "Scheduled";
+            var isStatus = item.status === status || (status === "In Process" && item.status === "Scheduled");
             const isUnit = item.businessunit === unitName;
 
             if (status === "Completed" && (item.status === "Completed - Late" || item.status === "Completed"))

@@ -29,7 +29,7 @@ function updateCyberSecurity(year) {
       const score = parseFloat(row[col["QUIZ SCORE"]]) || null;
       const completionDate = row[col["COMPLETION DATE"]] || null;
 
-      if (inactive === "ACTIVE") {
+      if (inactive === "ACTIVE" && status !== "No Need") {
         objList.push([
           row[col["BUSINESS UNIT"]],
           row[col["COMPLETE NAME"]],
@@ -91,7 +91,7 @@ function updateDataPrivacyTrainingData(year) {
         units[unit] = { employees: 0, inProgress: 0, completed: 0, scores: [] };
       }
 
-      if (inactive === "ACTIVE") {
+      if (inactive === "ACTIVE" && status !== "No Need") {
         objList.push([
           row[col["BUSINESS UNIT"]],
           row[col["COMPLETE NAME"]],

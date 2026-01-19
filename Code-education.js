@@ -347,8 +347,12 @@ function getDataPrivacyTrainingData(year) {
     const unit = row[col["Business Unit"]];
     if (!unit) return;
 
-    const status = row[col["Status"]];
+    let status = row[col["Status"]];
     const score = parseFloat(row[col["Score"]]) || null;
+
+    if (inProgressStatuses.includes(status)) {
+      status = "In Progress";
+    }
 
     if (!units[unit]) {
       units[unit] = { employees: 0, inProgress: 0, completed: 0, scores: [] };
@@ -360,9 +364,6 @@ function getDataPrivacyTrainingData(year) {
     if (status === "Completed") {
       units[unit].completed++;
       if (score !== null) units[unit].scores.push(score);
-    }
-    else {
-      units[unit].inProgress++;
     }
 
     objList.push({
@@ -483,8 +484,12 @@ function getCyberSecurityTrainingData(year) {
 
     if (!unit) return;
 
-    const status = row[col["Status"]];
+    let status = row[col["Status"]];
     const score = parseFloat(row[col["Score"]]) || null;
+
+    if (inProgressStatuses.includes(status)) {
+      status = "In Progress";
+    }
 
     if (!units[unit]) {
       units[unit] = {
@@ -506,10 +511,7 @@ function getCyberSecurityTrainingData(year) {
       units[unit].completed++;
       if (score !== null) units[unit].scores.push(score);
     }
-    else {
-      units[unit].inProgress++;
-    }
-
+     
     objList.push({
       businessunit: row[col["Business Unit"]],
       name: row[col["Name"]],
