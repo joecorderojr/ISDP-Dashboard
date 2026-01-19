@@ -354,7 +354,9 @@ const PRMainChart = new Chart(PRMain, PRMainconfig);
 
     let newData;
     if (type === 'dp') {
-      if (selectedYear === '2024' || selectedYear === '2025') {
+      if (selectedYear === '2024') {
+        newData = [<?!=dataPrivacyTrainingsTotal2024.completedCount?>, <?!=dataPrivacyTrainingsTotal2024.inProgressCount?>];
+      } else if (selectedYear === '2025') {
         newData = [<?!=dataPrivacyTrainingsTotal2025.completedCount?>, <?!=dataPrivacyTrainingsTotal2025.inProgressCount?>];
       } else if (selectedYear === '2026') {
         newData = [<?!=dataPrivacyTrainingsTotal2026.completedCount?>, <?!=dataPrivacyTrainingsTotal2026.inProgressCount?>];
