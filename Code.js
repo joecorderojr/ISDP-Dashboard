@@ -9,6 +9,7 @@ function doGet() {
 
   initializedDocumentVariables(); 
   getDataPrivacyTrainingData2025();
+  getDataPrivacyTrainingData2026();
   getCyberSecurityTrainingData2025();
   getCyberSecurityTrainingData2026();
   getCyberSecurityTrainingData2024();

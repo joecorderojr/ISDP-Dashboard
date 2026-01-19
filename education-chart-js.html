@@ -39,14 +39,7 @@ const DP101config = {
                   color: 'white', // Legend text color
               }
           },
-          title: {
-              display: true,
-              text: 'Data Privacy 101',
-              color: 'white',
-              font: {
-                size: 20
-              }
-          },
+          title: { display: false },
           tooltip: customTooltipDonut
         }
     },
@@ -60,11 +53,7 @@ const DP101Mainconfig = {
         plugins: {
             datalabels: { display: false },
             legend: { display: false },
-            title: {
-                display: true,
-                text: 'Data Privacy 101',
-                color: 'white'
-            },
+            title: { display: false },
             tooltip: customTooltipDonutMain
         }
     },
@@ -116,14 +105,7 @@ const C101ETconfig = {
                   color: 'white', // Legend text color
               }
           },
-          title: {
-              display: true,
-              text: 'Cybersecurity 101',
-              color: 'white', 
-              font: {
-                size: 20
-              }
-          },
+          title: { display: false },
           tooltip: customTooltipDonut
         }
     },
@@ -137,11 +119,7 @@ const C101ETMainconfig = {
         plugins: {
             datalabels: { display: false },
             legend: { display: false },
-            title: {
-                display: true,
-                text: 'Cybersecurity 101',
-                color: 'white'
-            },
+            title: { display: false },
             tooltip: customTooltipDonutMain
         }
     },
@@ -339,5 +317,63 @@ const PRChart = new Chart(PR, PRconfig);
 const PRMainChart = new Chart(PRMain, PRMainconfig);
 
 
+  document.addEventListener('click', function(e) {
+    const item = e.target.closest('.year-menu .dropdown-item');
+    if (!item) return;
+
+    e.preventDefault();
+    e.stopPropagation(); // Prevent parent box click
+
+    const menu = item.closest('.year-menu');
+    const button = menu.previousElementSibling;
+    const selectedYear = item.textContent.trim();
+    const currentYear = button.textContent.match(/\d{4}/)[0];
+
+    // Update button text
+    const type = button.dataset.type; // 'dp' or 'cs'
+    if (type === 'dp') {
+      button.textContent = `Data Privacy 101 – ${selectedYear}`;
+      dataPrivacySelectedYear = selectedYear;
+    } else if (type === 'cs') {
+      button.textContent = `Cybersecurity 101 – ${selectedYear}`;
+      cyberSecuritySelectedYear = selectedYear;
+    }
+
+    // Swap dropdown item text
+    item.textContent = currentYear;
+
+    // Update charts
+    const chartMap = {
+      dpYearDropdown: DP101MainPieChart,
+      dpYearDropdownMain: DP101PieChart,
+      csYearDropdown: C101ETMainPieChart,
+      csYearDropdownMain: C101ETPieChart
+    };
+    const chart = chartMap[button.id];
+    if (!chart) return;
+
+    let newData;
+    if (type === 'dp') {
+      if (selectedYear === '2024' || selectedYear === '2025') {
+        newData = [<?!=dataPrivacyTrainingsTotal2025.completedCount?>, <?!=dataPrivacyTrainingsTotal2025.inProgressCount?>];
+      } else if (selectedYear === '2026') {
+        newData = [<?!=dataPrivacyTrainingsTotal2026.completedCount?>, <?!=dataPrivacyTrainingsTotal2026.inProgressCount?>];
+      }
+      chart.data.datasets[0].data = newData;
+      chart.options.plugins.title.text = `Data Privacy 101 – ${selectedYear}`;
+    } else if (type === 'cs') {
+      if (selectedYear === '2024') {
+        newData = [<?!= cyberSecurityTrainingsTotal2024.completedTotal ?>, <?!= cyberSecurityTrainingsTotal2024.inProgressCount ?>, <?!= cyberSecurityTrainingsTotal2024.incompleteMissing ?>];
+      } else if (selectedYear === '2025') {
+        newData = [<?!= cyberSecurityTrainingsTotal2025.completedTotal ?>, <?!= cyberSecurityTrainingsTotal2025.inProgressCount ?>, <?!= cyberSecurityTrainingsTotal2025.incompleteMissing ?>];
+      } else if (selectedYear === '2026') {
+        newData = [<?!= cyberSecurityTrainingsTotal2026.completedTotal ?>, <?!= cyberSecurityTrainingsTotal2026.inProgressCount ?>, <?!= cyberSecurityTrainingsTotal2026.incompleteMissing ?>];
+      }
+      chart.data.datasets[0].data = newData;
+      chart.options.plugins.title.text = `Cybersecurity 101 – ${selectedYear}`;
+    }
+
+    chart.update();
+  });
 
 </script>
