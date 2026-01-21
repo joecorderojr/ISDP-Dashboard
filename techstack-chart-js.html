@@ -4,17 +4,20 @@ const Q2S = document.getElementById('Q2S').getContext('2d');
 const Q2SMain = document.getElementById('Q2SMain').getContext('2d');
 
 const colors = {
-    critical: 'rgba(153, 27, 27, 1)',
-    high: 'rgba(194, 65, 12, 1)',
-    medium: 'rgba(161, 98, 7, 1)',
-    low: 'rgba(21, 128, 61, 1)'
+    critical: '#91243E',
+    high: '#DD4B50',
+    medium: '#F18C43',
+    low: '#F8C851'
   };
   
+  const originalData = <?!=vaSummary_data?>;
+  const chartData = originalData.map(value => value === 0 ? 0.5 : value);
+
   const Q2Sdata = {
     labels: ['Critical', 'High', 'Medium', 'Low'],
     datasets: [
       {
-        data: <?!=vaSummary_data?>, 
+        data: chartData, 
         backgroundColor: [
           colors.critical,
           colors.high,
@@ -31,7 +34,10 @@ const colors = {
         borderRadius: 4,
         datalabels: {
           color: 'white',
-          display: true
+          display: true,
+          formatter: function(value, context) {
+            return originalData[context.dataIndex];
+          }
         }
       },
       
@@ -42,7 +48,7 @@ const Q2SdataMain = {
     labels: ['C', 'H', 'M', 'L'],
     datasets: [
       {
-        data: <?!=vaSummary_data?>, 
+        data: chartData, 
         backgroundColor: [
           colors.critical,
           colors.high,
@@ -59,7 +65,10 @@ const Q2SdataMain = {
         borderRadius: 4,
         datalabels: {
           color: 'white',
-          display: true
+          display: true,
+          formatter: function(value, context) {
+            return originalData[context.dataIndex];
+          }
         }
       },
       
@@ -108,7 +117,7 @@ const Q2config = {
 
 const Q2Mainconfig = {
     type: 'bar', // Specify chart type
-    data: Q2Sdata,
+    data: Q2SdataMain,
     options: {
         responsive: true,
         plugins: {
