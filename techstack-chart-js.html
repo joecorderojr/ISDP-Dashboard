@@ -9,8 +9,8 @@ const colors = {
     medium: '#F18C43',
     low: '#F8C851'
   };
-  
-  const originalData = <?!=vaSummary_data?>;
+
+  const originalData = <?!=JSON.stringify(vaSummary_data)?>;
   const chartData = originalData.map(value => value === 0 ? 0.5 : value);
 
   const Q2Sdata = {
@@ -83,7 +83,7 @@ const Q2config = {
         plugins: {
             legend: { display: false  },
             title: {
-                display: true,
+                display: false,
                 text: '<?!=vaPeriod?>',
                 color: 'white'
             },
@@ -124,7 +124,7 @@ const Q2Mainconfig = {
             datalabels: { display: false },
             legend: { display: false },
             title: {
-                display: true,
+                display: false,
                 text: '<?!=vaPeriod?>',
                 color: 'white'
             },
@@ -157,8 +157,8 @@ const Q2Mainconfig = {
     }
 };
 
-const Q2Schart = new Chart(Q2S, Q2config);
-const Q2SMainchart = new Chart(Q2SMain, Q2Mainconfig);
+Q2Schart = new Chart(Q2S, Q2config);
+Q2SMainchart = new Chart(Q2SMain, Q2Mainconfig);
 
-  
+ 
 </script>

@@ -5,6 +5,18 @@
 <div class="row">
   <div class="col-6">
     <div class="chart-container">
+      <div class="dropdown mb-2 d-flex justify-content-center">
+        <button class="btn btn-link dropdown-toggle chart-title-dropdown education-dropdown-title year-dropdown"
+          data-type="va" id="vaSummaryDropdown" data-bs-toggle="dropdown">
+          VA Summary - <?=vaPeriod?>
+        </button>
+      
+        <ul class="dropdown-menu custom-dropdown-menu custom-dropdown year-menu" data-type="va" id="vaYearMenuMain">
+          <? vaSummaryAll.forEach(item => { ?>
+          <li><a class="dropdown-item education-dropdown-title" href="#"><?= item.period ?></a></li>
+          <? }) ?>
+        </ul>
+      </div>
       <canvas id="Q2S"></canvas>
       <a href="https://drive.google.com/drive/u/0/folders/1tcM-9MsOuIm1bRXdDXCv3Av54a5Lmbh8" 
          class="btn btn-outline-success btn-sm btn-overlay"

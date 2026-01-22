@@ -1,0 +1,95 @@
+<script>
+    let DP101MainPieChart;
+    let DP101PieChart;
+    let C101ETMainPieChart;
+    let C101ETPieChart;
+    let Q2Schart;
+    let Q2SMainchart;
+
+    document.addEventListener('click', function (e) {
+            const item = e.target.closest('.year-menu .dropdown-item');
+            if (!item) return;
+
+            e.preventDefault();
+            e.stopPropagation(); // Prevent parent box click
+
+            const menu = item.closest('.year-menu');
+            const button = menu.previousElementSibling;
+            const selectedPeriod = item.textContent.trim();
+            const currentYear = button.textContent.match(/\d{4}/)[0];
+
+            // Update button text
+            const type = button.dataset.type; // 'dp' or 'cs'
+            if (type === 'dp') {
+                button.textContent = `Data Privacy 101 – ${selectedPeriod}`;
+                dataPrivacySelectedPeriod = selectedPeriod;
+                // Swap dropdown item text
+                item.textContent = currentYear;
+            } else if (type === 'cs') {
+                button.textContent = `Cybersecurity 101 – ${selectedPeriod}`;
+                cyberSecuritySelectedPeriod = selectedPeriod;
+                // Swap dropdown item text
+                item.textContent = currentYear;
+            } else if (type === 'va') {
+                button.textContent = `VA Summary – ${selectedPeriod}`;
+                vaSummarySelectedPeriod = selectedPeriod;
+            }
+           
+            // Update charts
+            const chartMap = {
+                dpYearDropdown: DP101MainPieChart,
+                dpYearDropdownMain: DP101PieChart,
+                csYearDropdown: C101ETMainPieChart,
+                csYearDropdownMain: C101ETPieChart,
+                vaSummaryDropdown: Q2Schart,
+                vaSummaryDropdownMain: Q2SMainchart
+            };
+
+            const chart = chartMap[button.id];
+            if (!chart) return;
+
+            let originalData;
+            let pieTitle;
+            let chartData;
+
+            if (type === 'dp') {
+                if (selectedPeriod === '2024') {
+                    originalData = [<?!= dataPrivacyTrainingsTotal2024.completedCount ?>, <?!= dataPrivacyTrainingsTotal2024.inProgressCount ?>];
+                } else if (selectedPeriod === '2025') {
+                    originalData = [<?!= dataPrivacyTrainingsTotal2025.completedCount ?>, <?!= dataPrivacyTrainingsTotal2025.inProgressCount ?>];
+                } else if (selectedPeriod === '2026') {
+                    originalData = [<?!= dataPrivacyTrainingsTotal2026.completedCount ?>, <?!= dataPrivacyTrainingsTotal2026.inProgressCount ?>];
+                }
+                pieTitle = `Data Privacy 101 – ${selectedPeriod}`;
+                chartData = originalData;
+                chart.options.plugins.datalabels.formatter = (value) => value === 0 ? '' : value;
+
+            } else if (type === 'cs') {
+                if (selectedPeriod === '2024') {
+                    originalData = [<?!= cyberSecurityTrainingsTotal2024.completedTotal ?>, <?!= cyberSecurityTrainingsTotal2024.inProgressCount ?>, <?!= cyberSecurityTrainingsTotal2024.incompleteMissing ?>];
+                } else if (selectedPeriod === '2025') {
+                    originalData = [<?!= cyberSecurityTrainingsTotal2025.completedTotal ?>, <?!= cyberSecurityTrainingsTotal2025.inProgressCount ?>, <?!= cyberSecurityTrainingsTotal2025.incompleteMissing ?>];
+                } else if (selectedPeriod === '2026') {
+                    originalData = [<?!= cyberSecurityTrainingsTotal2026.completedTotal ?>, <?!= cyberSecurityTrainingsTotal2026.inProgressCount ?>, <?!= cyberSecurityTrainingsTotal2026.incompleteMissing ?>];
+                }
+
+                pieTitle = `Cybersecurity 101 – ${selectedPeriod}`;
+                chartData = originalData;
+                chart.options.plugins.datalabels.formatter = (value) => value === 0 ? '' : value;
+
+            } else if (type === 'va') {
+                var newPeriod = vaSummaryAll.find(item => item.period === selectedPeriod);
+                originalData = [newPeriod.critical, newPeriod.high, newPeriod.medium, newPeriod.low];
+                chartData = originalData.map(value => value === 0 ? 0.5 : value);
+                chart.options.plugins.datalabels.formatter = (value, context) => {
+                    return originalData[context.dataIndex];
+                };
+
+                pieTitle = `VA Summary – ${selectedPeriod}`;
+            }
+
+            chart.data.datasets[0].data = chartData;
+            chart.options.plugins.title.text = pieTitle;
+            chart.update();
+        });
+</script>

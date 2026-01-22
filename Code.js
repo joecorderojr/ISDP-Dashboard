@@ -18,7 +18,7 @@ function doGet() {
   getISO27001Data();
   getNPCChecklist();
   getTPSData();
-  getVASummaryData();
+  getVASummary();
   getSOC2TYPE2ChartData();
   getISOComplianceStatus();
 

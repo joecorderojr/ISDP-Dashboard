@@ -127,6 +127,54 @@ function getVASummaryData() {
   }
 }
 
+function getVASummary() {
+  try {
+    // 1. Open the spreadsheet and get the data
+    var ss = SpreadsheetApp.openByUrl(appSettingURL);
+    const sheet = ss.getSheetByName('VASummary'); // Ensure your sheet is named 'Sheet1'
+    
+    var dataArray = sheet.getRange("A1:F1000").getValues();
+    const data = filterEmptyRows(dataArray);
+
+    const headers = data[0];
+    const rows = data.slice(1);
+
+    const col = headers.reduce((map, h, i) => ((map[h] = i), map), {});
+
+    const periods = {};
+
+    rows.forEach((row) => {
+      const period = row[col["Period"]];
+      if (!period) return;
+
+      const critical = parseInt(row[col["Critical"]]) || null;
+      const high = parseInt(row[col["High"]]) || null;
+      const medium = parseInt(row[col["Medium"]]) || null;
+      const low = parseInt(row[col["Low"]]) || null;
+
+      if (!periods[period]) {
+        periods[period] = { period: period, critical: 0, high: 0, medium: 0, low: 0 };
+      }
+
+      periods[period].critical += critical || 0;
+      periods[period].high += high || 0;
+      periods[period].medium += medium || 0;
+      periods[period].low += low || 0;
+       
+    });
+
+    const sortedPeriods = Object.values(periods).sort((a, b) => b.period.localeCompare(a.period));
+    
+    vaSummaryAll = sortedPeriods;
+    vaSummary_data = [sortedPeriods[0].critical, sortedPeriods[0].high, sortedPeriods[0].medium, sortedPeriods[0].low];
+    vaPeriod = sortedPeriods[0].period;
+
+  } catch (e) {
+    Logger.log('Error fetching data: ' + e.toString());
+    return null;
+  }
+}
+
 
 function getSOC2TYPE2Data() {
   try {
