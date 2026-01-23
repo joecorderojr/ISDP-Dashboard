@@ -50,7 +50,7 @@
 
             let originalData;
             let pieTitle;
-            let chartData;
+            let newData;
 
             if (type === 'dp') {
                 if (selectedPeriod === '2024') {
@@ -61,7 +61,7 @@
                     originalData = [<?!= dataPrivacyTrainingsTotal2026.completedCount ?>, <?!= dataPrivacyTrainingsTotal2026.inProgressCount ?>];
                 }
                 pieTitle = `Data Privacy 101 – ${selectedPeriod}`;
-                chartData = originalData;
+                newData = originalData;
                 chart.options.plugins.datalabels.formatter = (value) => value === 0 ? '' : value;
 
             } else if (type === 'cs') {
@@ -74,21 +74,18 @@
                 }
 
                 pieTitle = `Cybersecurity 101 – ${selectedPeriod}`;
-                chartData = originalData;
+                newData = originalData;
                 chart.options.plugins.datalabels.formatter = (value) => value === 0 ? '' : value;
 
             } else if (type === 'va') {
                 var newPeriod = vaSummaryAll.find(item => item.period === selectedPeriod);
                 originalData = [newPeriod.critical, newPeriod.high, newPeriod.medium, newPeriod.low];
-                chartData = originalData.map(value => value === 0 ? 0.5 : value);
-                chart.options.plugins.datalabels.formatter = (value, context) => {
-                    return originalData[context.dataIndex];
-                };
-
+                newData = originalData.map(value => value === 0 ? 0.5 : value);
                 pieTitle = `VA Summary – ${selectedPeriod}`;
+                chart.options.plugins.datalabels.formatter = (value) => value === 0.5 ? '0' : value;
             }
 
-            chart.data.datasets[0].data = chartData;
+            chart.data.datasets[0].data = newData;
             chart.options.plugins.title.text = pieTitle;
             chart.update();
         });

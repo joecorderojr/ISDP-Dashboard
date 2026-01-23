@@ -35,9 +35,10 @@ const colors = {
         datalabels: {
           color: 'white',
           display: true,
-          formatter: function(value, context) {
-            return originalData[context.dataIndex];
+          formatter: (value) => {
+            return value === 0.5 ? 0 : value;
           }
+          
         }
       },
       
@@ -66,8 +67,8 @@ const Q2SdataMain = {
         datalabels: {
           color: 'white',
           display: true,
-          formatter: function(value, context) {
-            return originalData[context.dataIndex];
+          formatter: (value) => {
+            return value === 0.5 ? 0 : value;
           }
         }
       },
