@@ -23,6 +23,32 @@
     onDataPrivacyClick("2024");
   });
 
+  $("#btnDocumentsReview").click(function () {
+    onDocumentsReviewClick();
+  });
+
+  function onDocumentsReviewClick() {
+    $("#lblDocumentsReview").html("synching...");
+    $("#lblDocumentsReview").removeClass();
+
+    google.script.run
+      .withSuccessHandler(function (data) {
+        // 'data' is the JSON object returned by updateDocumentsReview()
+        if (data && data === "Success") {
+          $("#lblDocumentsReview").html("synced");
+          $("#lblDocumentsReview").addClass("text-success");
+        } else {
+          $("#lblDocumentsReview").html("error");
+          $("#lblDocumentsReview").addClass("text-danger");
+        }
+      })
+      .withFailureHandler(function (error) {
+        $("#lblDocumentsReview").html("error: " + error.message);
+        $("#lblDocumentsReview").addClass("text-danger");
+      })
+      .updateDocumentsReview(); // The function name in Code-sync.gs
+  }
+
   function onCyberClick(year){
     $("#lblSyncCyber" + year).html("synching...");
     $("#lblSyncCyber" + year).removeClass();

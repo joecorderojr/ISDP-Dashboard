@@ -125,3 +125,32 @@ function saveTrainingData(list, sheetName) {
     sheet.getRange(rowIndex + 2, 1, 1, 7).setValues([rowData]);
   });
 }
+
+function updateDocumentsReview()
+{
+  try {
+    var ss = SpreadsheetApp.openByUrl(documentUrl);
+    var ws = ss.getSheetByName("Updated Masterlist");
+
+    var list = ws.getRange("A2:N1000").getValues();
+    const data = filterEmptyRows(list);
+
+    saveDocumentData(data, "Documents");
+
+    Logger.log("Document Data List: " + JSON.stringify(data));
+    return "Success";
+  } catch (e) {
+    Logger.log("Error: " + e.toString());
+    return "Failed";
+  }
+
+}
+
+function saveDocumentData(list, sheetName) {
+  const ss = SpreadsheetApp.openByUrl(appSettingURL);
+  const sheet = ss.getSheetByName(sheetName);
+  sheet.getRange("A2:N1000").clearContent();
+  list.map(function (rowData, rowIndex) {
+    sheet.getRange(rowIndex + 2, 1, 1, 14).setValues([rowData]);
+  });
+}

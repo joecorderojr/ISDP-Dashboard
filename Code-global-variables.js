@@ -1,4 +1,4 @@
-const url = "https://docs.google.com/spreadsheets/d/1Sxcw_EVGR3VTfcWP-S3_NbBdYu1riZHmN88e2dM0ivA/edit?gid=638578937#gid=638578937";
+const documentUrl = "https://docs.google.com/spreadsheets/d/1Sxcw_EVGR3VTfcWP-S3_NbBdYu1riZHmN88e2dM0ivA/edit?gid=638578937#gid=638578937";
 const hrURL =
   "https://docs.google.com/spreadsheets/d/1CzfTxPZvFXgz7J0rFHxw82CR5McSCP-h5pop_YL3Rq4/edit?gid=1092268223#gid=1092268223";
 const appSettingURL = "https://docs.google.com/spreadsheets/d/1WvLg2sRLzP8xaROWkBtcfgFzyZJhawQXP_O1PxqD0ao/edit?gid=1428041287#gid=1428041287";

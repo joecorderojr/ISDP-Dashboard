@@ -1,12 +1,17 @@
 function loadDocumentData()
 {
-  var ss = SpreadsheetApp.openByUrl(url);
+  var ss = SpreadsheetApp.openByUrl(documentUrl);
   var ws = ss.getSheetByName("Updated Masterlist");
 
   var lastrow = ws.getRange("A1").getDataRegion().getLastRow();
   var list = ws.getRange(2,1,lastrow,14).getValues();
 
   return list;
+}
+
+function getDocumentData()
+{
+
 }
 
 function initializedDocumentVariables()
